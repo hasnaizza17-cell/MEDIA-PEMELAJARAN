@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Pembelajaran Interaktif PAI | Mari Mengenal Malaikat Allah | Hasna Izzatul Aisy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --sky: #5BB8E8;
+  --sky-dark: #3A8EC4;
+  --sky-light: #C8EAFB;
+  --gold: #F9C22B;
+  --gold-dark: #E0A800;
+  --green: #5DB85C;
+  --green-light: #EAFBE8;
+  --coral: #F97B5B;
+  --purple: #9B72CF;
+  --white: #FFFDF7;
+  --cloud: #EAF6FF;
+  --text: #2C3E50;
+  --radius: 22px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* Mobile touch fixes */
+button, .angel-card, .match-item, .jurnal-item, .komitmen-item,
+.yel-angel-btn, .yel-all-btn, .rp-char, .tab-btn, .quiz-opt,
+.restart-btn, .rp-btn, .btn-next, .btn-prev, .yel-task-bubble {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(160deg, #87CEEB 0%, #B8E4F7 40%, #D4EDFF 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/*  FLOATING STARS  */
+.star { position:fixed; pointer-events:none; z-index:0; font-size:18px; animation: floatStar 6s infinite ease-in-out; opacity:0.5; }
+@keyframes floatStar { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-14px) rotate(15deg);} }
+
+/*  CLOUDS DECO  */
+.cloud-deco { position:fixed; top:20px; pointer-events:none; z-index:0; opacity:0.3; font-size:64px; animation:cloudFloat 8s infinite ease-in-out; }
+@keyframes cloudFloat { 0%,100%{transform:translateX(0);} 50%{transform:translateX(12px);} }
+
+/*  WRAPPER  */
+#app { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:16px 14px 40px; }
+
+/*  TOP HEADER  */
+.top-header {
+  background: linear-gradient(135deg, #1565C0 0%, #1976D2 40%, #2196F3 100%);
+  border-radius: 26px;
+  padding: 22px 28px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 40px rgba(21,101,192,.35);
+  position:relative; overflow:hidden;
+  text-align:center;
+}
+.top-header::before {
+  content:'';
+  position:absolute; top:-30px; right:-30px;
+  width:140px; height:140px; border-radius:50%;
+  background: rgba(255,255,255,.08);
+}
+.top-header .badge-top {
+  display:inline-block;
+  background: rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.35);
+  color:#fff; font-size:11px; font-weight:700;
+  letter-spacing:1.5px; padding:4px 14px; border-radius:99px;
+  margin-bottom:10px;
+}
+.top-header h1 {
+  font-family:'Fredoka One', cursive;
+  font-size: clamp(20px,4vw,32px);
+  color: #FFD700;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.2);
+  line-height:1.2; margin-bottom:4px;
+}
+.top-header p { color:rgba(255,255,255,.8); font-size:13px; }
+.moon-emoji { font-size:32px; display:block; margin-bottom:8px; animation: moonGlow 3s infinite ease-in-out; }
+@keyframes moonGlow { 0%,100%{filter:brightness(1);} 50%{filter:brightness(1.3) drop-shadow(0 0 12px gold);} }
+
+/*  NAV TABS  */
+.nav-tabs {
+  display:flex; gap:8px; flex-wrap:wrap;
+  justify-content:center; margin-bottom:18px;
+}
+.tab-btn {
+  padding:10px 18px; border-radius:99px; border:none;
+  font-family:'Nunito',sans-serif; font-size:13px; font-weight:800;
+  cursor:pointer; transition:all .25s;
+  background: rgba(255,255,255,.55);
+  color: #1565C0;
+  box-shadow: 0 4px 14px rgba(0,0,0,.1);
+}
+.tab-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.15); }
+.tab-btn.active { color:#fff; transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.2); }
+.tab-btn.t0.active { background: linear-gradient(135deg, #F97B5B, #FF9A3C); }
+.tab-btn.t1.active { background: linear-gradient(135deg, #5BB8E8, #3A8EC4); }
+.tab-btn.t2.active { background: linear-gradient(135deg, #5DB85C, #3DA33C); }
+.tab-btn.t3.active { background: linear-gradient(135deg, #9B72CF, #7B52AF); }
+.tab-btn.t4.active { background: linear-gradient(135deg, #F9C22B, #E0A800); color:#1a1a1a; }
+.tab-btn.t5.active { background: linear-gradient(135deg, #F97B5B, #E84393); }
+.tab-btn.t6.active { background: linear-gradient(135deg, #0D47A1, #1565C0); }
+
+/*  PANEL  */
+.panel { display:none; animation:fadeUp .4s ease; }
+.panel.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+/*  CARD  */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow:hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  margin-bottom:16px;
+}
+.card-head {
+  padding:20px 26px 16px;
+  position:relative; overflow:hidden;
+}
+.card-head h2 {
+  font-family:'Fredoka One',cursive;
+  font-size: clamp(17px,3vw,24px);
+  color:#fff;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.15);
+  line-height:1.2;
+}
+.card-head .stage-badge {
+  display:inline-block;
+  background:rgba(255,255,255,.22);
+  border:1px solid rgba(255,255,255,.4);
+  color:#fff; font-size:10px; font-weight:700;
+  letter-spacing:1.2px; padding:3px 12px; border-radius:99px;
+  margin-bottom:8px;
+}
+.card-body { padding:22px 26px; }
+
+/* STAGE COLORS */
+.head-connect { background:linear-gradient(135deg,#F97B5B,#FF9A3C); }
+.head-experience { background:linear-gradient(135deg,#5BB8E8,#3A8EC4); }
+.head-think { background:linear-gradient(135deg,#9B72CF,#7B52AF); }
+.head-deep { background:linear-gradient(135deg,#5DB85C,#3DA33C); }
+.head-transfer { background:linear-gradient(135deg,#F9C22B,#E0A800); }
+.head-transfer h2, .head-transfer .stage-badge { color:#2C3E50; text-shadow:none; }
+.head-transfer .stage-badge { border-color:rgba(0,0,0,.2); background:rgba(0,0,0,.1); color:#2C3E50; }
+
+/*  COVER PANEL  */
+.cover-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+.cover-info-box {
+  background: var(--cloud);
+  border-radius:16px; padding:16px;
+  border-left:4px solid var(--sky);
+}
+.cover-info-box h4 { font-size:11px; color:var(--sky-dark); font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+.cover-info-box p { font-size:14px; color:var(--text); font-weight:700; line-height:1.4; }
+
+.tujuan-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.tujuan-list li {
+  display:flex; gap:10px; align-items:flex-start;
+  font-size:13.5px; color:#444; line-height:1.4;
+}
+.tujuan-list li::before {
+  content:'⭐'; flex-shrink:0; font-size:13px; margin-top:1px;
+}
+
+/*  QUESTIONS / PEMANTIK  */
+.pemantik-box {
+  background: linear-gradient(135deg, #FFF3CD, #FFF8E1);
+  border:2px solid var(--gold);
+  border-radius:16px; padding:18px 20px; margin:14px 0;
+}
+.pemantik-box h3 { color:#B8860B; font-size:14px; font-weight:800; margin-bottom:10px; }
+.pemantik-box .q-item { display:flex; gap:10px; align-items:flex-start; margin:6px 0; font-size:14px; color:#5a4010; }
+.pemantik-box .q-item::before { content:'💭'; flex-shrink:0; }
+
+/*  ANGEL CARDS  */
+.angel-cards-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+  gap:12px; margin:16px 0;
+}
+.angel-card {
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 4px 16px rgba(0,0,0,.1);
+  cursor:pointer; transition:transform .2s;
+  text-align:center;
+}
+.angel-card:hover { transform:translateY(-4px) scale(1.03); }
+.angel-card-inner { padding:16px 10px; }
+.angel-card .emoji { font-size:32px; display:block; margin-bottom:6px; }
+.angel-card .name { font-family:'Fredoka One',cursive; font-size:15px; color:#fff; display:block; }
+.angel-card .arabic { font-size:11px; color:rgba(255,255,255,.8); display:block; font-style:italic; }
+.angel-card-footer { padding:8px 6px; font-size:11px; font-weight:700; color:#fff; }
+
+/*  ANGEL INFO EXPANDED  */
+.angel-detail {
+  background:var(--cloud); border-radius:14px; padding:14px 18px;
+  margin-top:8px; display:none; font-size:13px; color:var(--text);
+  border-left:4px solid var(--sky);
+  animation:fadeUp .3s ease;
+}
+/* angel-detail shown via JS */
+.angel-detail { display:none; }
+
+/*  FULL ANGEL TABLE  */
+.angel-table { width:100%; border-collapse:separate; border-spacing:0 8px; margin:10px 0; }
+.angel-table thead th {
+  background: linear-gradient(135deg,#1565C0,#1976D2);
+  color:#fff; font-size:13px; padding:10px 14px; text-align:left;
+}
+.angel-table thead th:first-child { border-radius:12px 0 0 12px; }
+.angel-table thead th:last-child { border-radius:0 12px 12px 0; }
+.angel-table tbody tr { background:var(--cloud); }
+.angel-table tbody td { padding:10px 14px; font-size:13px; }
+.angel-table tbody td:first-child { border-radius:12px 0 0 12px; font-weight:800; color:#1565C0; }
+.angel-table tbody td:last-child { border-radius:0 12px 12px 0; }
+.angel-table tbody tr:hover { background:#D4EDFF; }
+
+/*  MATCHING GAME  */
+.match-section { margin:16px 0; }
+.match-instruction {
+  background: linear-gradient(135deg,#1565C0,#1976D2);
+  color:#fff; border-radius:14px; padding:14px 18px;
+  font-size:14px; font-weight:700; margin-bottom:14px;
+  text-align:center;
+}
+.match-cols { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.match-col h4 { font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; }
+.match-col h4.left-h { color:var(--sky-dark); }
+.match-col h4.right-h { color:var(--green); }
+.match-item {
+  padding:10px 14px; border-radius:12px;
+  margin-bottom:8px; font-size:13px; font-weight:700;
+  cursor:pointer; transition:all .2s;
+  border:2px solid transparent;
+  user-select:none;
+}
+.match-item.angel-item { background:#E3F2FD; color:#1565C0; border-color:#90CAF9; }
+.match-item.task-item  { background:#E8F5E9; color:#2E7D32; border-color:#A5D6A7; }
+.match-item:hover:not(.matched):not(.selected) { transform:scale(1.03); box-shadow:0 4px 14px rgba(0,0,0,.15); }
+.match-item.selected { border-color:var(--gold); background:#FFF9C4; box-shadow:0 0 0 3px rgba(249,194,43,.4); }
+.match-item.matched { opacity:.5; cursor:default; background:#F0F0F0; color:#888; border-color:#ccc; }
+.match-item.matched.correct-flash { animation:correctFlash .5s ease; }
+@keyframes correctFlash { 0%{background:#C8E6C9;} 100%{background:#F0F0F0;} }
+.match-item.wrong-flash { animation:wrongShake .4s ease; }
+@keyframes wrongShake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-6px);} 75%{transform:translateX(6px);} }
+.match-score {
+  text-align:center; font-family:'Fredoka One',cursive;
+  font-size:18px; margin:12px 0;
+  color: var(--sky-dark);
+}
+.match-result { text-align:center; padding:14px; background:#E8F5E9; border-radius:14px; margin-top:10px; display:none; }
+.match-result.show { display:block; animation:fadeUp .4s ease; }
+
+/*  YEL-YEL  */
+.yel-container { text-align:center; }
+.yel-title { font-family:'Fredoka One',cursive; font-size:20px; color:#1565C0; margin-bottom:14px; }
+.yel-grid { display:flex; flex-direction:column; gap:10px; margin:14px 0; }
+.yel-row {
+  display:flex; align-items:center; justify-content:center;
+  gap:12px; flex-wrap:wrap;
+}
+.yel-angel-btn {
+  background: linear-gradient(135deg,#1565C0,#1976D2);
+  color:#fff; border:none; border-radius:99px;
+  padding:10px 22px; font-family:'Fredoka One',cursive;
+  font-size:16px; cursor:pointer;
+  transition:transform .15s, box-shadow .15s;
+  box-shadow:0 4px 14px rgba(21,101,192,.35);
+}
+.yel-angel-btn:hover { transform:scale(1.07); }
+.yel-angel-btn:active { transform:scale(.97); }
+.yel-arrow { font-size:22px; color:var(--gold-dark); }
+.yel-task-bubble {
+  background: var(--gold);
+  color: #2C3E50; border-radius:14px;
+  padding:10px 18px; font-family:'Fredoka One',cursive; font-size:15px;
+  opacity:0; transform:scale(.7);
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  min-width:120px; text-align:center;
+  box-shadow:0 4px 16px rgba(249,194,43,.4);
+}
+.yel-task-bubble.show { opacity:1; transform:scale(1); }
+.yel-all-btn {
+  background:linear-gradient(135deg,var(--coral),#FF6B35);
+  color:#fff; border:none; border-radius:99px;
+  padding:12px 30px; font-family:'Fredoka One',cursive;
+  font-size:17px; cursor:pointer;
+  box-shadow:0 6px 20px rgba(249,123,91,.4);
+  margin:10px auto; display:block;
+  transition:transform .2s;
+}
+.yel-all-btn:hover { transform:scale(1.05); }
+.yel-chant-display {
+  background: linear-gradient(135deg,#1565C0,#0D47A1);
+  border-radius:18px; padding:20px;
+  margin-top:14px; display:none;
+}
+.yel-chant-display.show { display:block; animation:fadeUp .4s ease; }
+.yel-line {
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(15px,3vw,20px);
+  color:#fff; text-align:center;
+  padding:6px 0;
+  animation: chantPop .3s ease backwards;
+}
+.yel-line span { color:var(--gold); }
+@keyframes chantPop { from{opacity:0;transform:scale(.8);} to{opacity:1;transform:scale(1);} }
+
+/*  ROLE PLAY  */
+.roleplay-scene {
+  background: linear-gradient(180deg,#E3F2FD 0%,#BBDEFB 100%);
+  border-radius:18px; padding:22px; text-align:center;
+  margin:14px 0;
+}
+.roleplay-chars { display:flex; justify-content:center; gap:30px; margin:14px 0; flex-wrap:wrap; }
+.rp-char { text-align:center; cursor:pointer; transition:transform .2s; }
+.rp-char:hover { transform:scale(1.08); }
+.rp-char .char-emoji { font-size:54px; display:block; animation:charBob 2s infinite ease-in-out; }
+.rp-char:nth-child(2) .char-emoji { animation-delay:.4s; }
+@keyframes charBob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+.rp-char .char-label { font-weight:800; font-size:13px; margin-top:6px; }
+.rp-char.child-char .char-label { color:#1565C0; }
+.rp-char.angel-char .char-label { color:var(--gold-dark); }
+.rp-speech {
+  background:#fff; border-radius:14px; padding:14px 18px;
+  font-size:14px; color:var(--text); margin:12px 0;
+  box-shadow:0 4px 16px rgba(0,0,0,.08);
+  text-align:left; display:none;
+  border-left:4px solid var(--sky);
+}
+.rp-speech.show { display:block; animation:fadeUp .35s ease; }
+.rp-speech .speaker { font-weight:800; margin-bottom:6px; }
+.rp-speech.angel-speech { border-left-color: var(--gold); }
+.rp-btn {
+  background:linear-gradient(135deg,var(--sky),var(--sky-dark));
+  color:#fff; border:none; border-radius:99px;
+  padding:11px 26px; font-family:'Nunito',sans-serif;
+  font-size:14px; font-weight:800; cursor:pointer;
+  box-shadow:0 5px 16px rgba(91,184,232,.4);
+  margin:6px; transition:transform .2s;
+}
+.rp-btn:hover { transform:scale(1.04); }
+
+/*  QUIZ  */
+.quiz-header { text-align:center; margin-bottom:18px; }
+.quiz-header h3 { font-family:'Fredoka One',cursive; font-size:22px; color:#1565C0; }
+.quiz-q-wrap { margin-bottom:6px; }
+.quiz-q-info { display:flex; justify-content:space-between; font-size:12px; font-weight:700; margin-bottom:8px; }
+.quiz-q-info .qnum { color:var(--sky-dark); letter-spacing:1px; }
+.quiz-q-info .qscore { background:#E3F2FD; color:#1565C0; padding:3px 12px; border-radius:99px; }
+.quiz-question { font-size:16px; font-weight:800; color:var(--text); margin-bottom:14px; line-height:1.4; }
+.quiz-options { display:flex; flex-direction:column; gap:9px; }
+.quiz-opt {
+  background:var(--cloud); border:2px solid #B3D9F5;
+  border-radius:13px; padding:12px 16px;
+  font-size:14px; font-weight:700; color:var(--text);
+  cursor:pointer; transition:all .2s;
+  display:flex; align-items:center; gap:11px;
+  font-family:'Nunito',sans-serif; text-align:left; width:100%;
+}
+.quiz-opt:hover:not(:disabled) { border-color:var(--sky); background:#DEEEF7; }
+.quiz-opt .opt-letter {
+  width:28px; height:28px; border-radius:8px;
+  background:var(--sky); color:#fff;
+  font-size:12px; font-weight:900;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.quiz-opt.correct { border-color:#4CAF50; background:#E8F5E9; color:#2E7D32; }
+.quiz-opt.correct .opt-letter { background:#4CAF50; }
+.quiz-opt.wrong { border-color:#EF5350; background:#FFEBEE; color:#C62828; }
+.quiz-opt.wrong .opt-letter { background:#EF5350; }
+.quiz-opt:disabled { cursor:default; }
+.quiz-feedback {
+  border-radius:12px; padding:12px 16px; font-size:13px;
+  margin-top:12px; display:none; line-height:1.5;
+}
+.quiz-feedback.show { display:block; animation:fadeUp .3s ease; }
+.qfb-correct { background:#E8F5E9; color:#2E7D32; border:1px solid #A5D6A7; }
+.qfb-wrong   { background:#FFEBEE; color:#C62828; border:1px solid #EF9A9A; }
+.quiz-nav-row { display:flex; justify-content:flex-end; margin-top:14px; }
+.quiz-next-btn {
+  background:linear-gradient(135deg,var(--sky),var(--sky-dark));
+  color:#fff; border:none; border-radius:99px;
+  padding:11px 26px; font-size:14px; font-weight:800;
+  cursor:pointer; box-shadow:0 5px 16px rgba(91,184,232,.4);
+  font-family:'Nunito',sans-serif; transition:transform .2s;
+  display:none;
+}
+.quiz-next-btn.show { display:block; animation:fadeUp .3s ease; }
+.quiz-next-btn:hover { transform:scale(1.04); }
+
+/*  QUIZ RESULT  */
+.quiz-result { text-align:center; }
+.stars-row { font-size:44px; margin:10px 0; animation:starsPop .6s ease; }
+@keyframes starsPop { from{transform:scale(.5);opacity:0;} to{transform:scale(1);opacity:1;} }
+.score-big { font-family:'Fredoka One',cursive; font-size:clamp(36px,8vw,56px); color:#1565C0; }
+.score-label { font-size:15px; color:#666; margin-bottom:16px; }
+.quiz-msg { font-size:16px; font-weight:700; color:var(--text); margin:12px 0; }
+.restart-btn {
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#2C3E50; border:none; border-radius:99px;
+  padding:12px 28px; font-size:15px; font-weight:800;
+  cursor:pointer; box-shadow:0 5px 16px rgba(249,194,43,.4);
+  font-family:'Nunito',sans-serif;
+}
+
+/*  JURNAL AMAL  */
+.jurnal-box {
+  background:linear-gradient(135deg,#FFF8E1,#FFF3CD);
+  border:2px solid var(--gold); border-radius:18px; padding:20px;
+}
+.jurnal-box h3 { font-family:'Fredoka One',cursive; font-size:18px; color:#B8860B; margin-bottom:14px; text-align:center; }
+.jurnal-item {
+  display:flex; align-items:center; gap:12px;
+  background:#fff; border-radius:12px; padding:12px 16px;
+  margin-bottom:10px; box-shadow:0 2px 8px rgba(0,0,0,.06);
+  cursor:pointer; transition:all .2s;
+  border:2px solid transparent;
+}
+.jurnal-item:hover { border-color:var(--gold); }
+.jurnal-item.checked { background:#E8F5E9; border-color:#4CAF50; }
+.jurnal-check {
+  width:26px; height:26px; border-radius:8px;
+  border:2px solid #ccc; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; transition:all .2s;
+}
+.jurnal-item.checked .jurnal-check { background:#4CAF50; border-color:#4CAF50; color:#fff; }
+.jurnal-text { font-size:14px; font-weight:700; flex:1; }
+.jurnal-footer { text-align:center; margin-top:12px; font-size:13px; color:#888; }
+.jurnal-progress { font-family:'Fredoka One',cursive; font-size:20px; color:var(--green); }
+
+/*  KOMITMEN  */
+.komitmen-box {
+  background:linear-gradient(135deg,#E8F5E9,#C8E6C9);
+  border-radius:16px; padding:18px; margin:14px 0;
+}
+.komitmen-box h4 { font-family:'Fredoka One',cursive; font-size:16px; color:#2E7D32; margin-bottom:12px; }
+.komitmen-item {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 14px; background:#fff; border-radius:10px;
+  margin-bottom:8px; font-size:14px; font-weight:700;
+  cursor:pointer; transition:all .2s;
+  border:2px solid transparent;
+}
+.komitmen-item:hover { border-color:#4CAF50; }
+.komitmen-item.done { background:#E8F5E9; border-color:#4CAF50; text-decoration:line-through; color:#4CAF50; }
+.komitmen-check { font-size:18px; }
+
+/*  GENERAL HELPERS  */
+.section-lbl {
+  font-size:11px; font-weight:800; letter-spacing:2px;
+  text-transform:uppercase; color:var(--sky-dark); margin:18px 0 10px;
+  display:flex; align-items:center; gap:8px;
+}
+.section-lbl::after { content:''; flex:1; height:2px; background:linear-gradient(to right,var(--sky-light),transparent); border-radius:1px; }
+
+p { font-size:14px; color:#444; line-height:1.7; margin-bottom:10px; }
+p:last-child { margin-bottom:0; }
+
+.fun-fact {
+  background:#F3E5F5; border-radius:14px; padding:14px 18px;
+  border-left:4px solid var(--purple); margin:12px 0;
+  font-size:13.5px; color:#4A148C;
+}
+.fun-fact strong { color:var(--purple); }
+
+.nav-btns { display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
+.btn-prev, .btn-next {
+  padding:10px 24px; border-radius:99px; border:none;
+  font-family:'Nunito',sans-serif; font-size:14px; font-weight:800;
+  cursor:pointer; transition:transform .2s;
+}
+.btn-next { background:linear-gradient(135deg,var(--sky),var(--sky-dark)); color:#fff; box-shadow:0 5px 16px rgba(91,184,232,.4); }
+.btn-next:hover { transform:scale(1.05); }
+.btn-prev { background:rgba(255,255,255,.8); color:var(--sky-dark); border:2px solid var(--sky-light); }
+.btn-prev:hover { background:#fff; }
+
+@media(max-width:600px){
+  .card-body { padding:16px 18px; }
+  .card-head { padding:16px 18px 12px; }
+  .match-cols { grid-template-columns:1fr; }
+  .cover-grid { grid-template-columns:1fr; }
+  .angel-cards-grid { grid-template-columns:repeat(2,1fr); }
+}
+
+/* ============ EDITOR SYSTEM ============ */
+
+/* Edit Mode Toggle Button */
+#edit-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  background: linear-gradient(135deg, #FF6B35, #F9C22B);
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  padding: 14px 22px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255,107,53,.45);
+  transition: all .25s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: .3px;
+}
+#edit-toggle:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 30px rgba(255,107,53,.5); }
+#edit-toggle.active { background: linear-gradient(135deg, #EF5350, #C62828); box-shadow: 0 6px 24px rgba(239,83,80,.45); }
+
+/* Floating Toolbar */
+#editor-toolbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9998;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 10px 16px;
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  border-bottom: 2px solid rgba(249,194,43,.3);
+}
+#editor-toolbar.show { display: flex; }
+
+.tb-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 10px;
+  border-right: 1px solid rgba(255,255,255,.15);
+  margin-right: 4px;
+}
+.tb-group:last-child { border-right: none; }
+
+.tb-btn {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
+}
+.tb-btn:hover { background: rgba(255,255,255,.22); transform: scale(1.05); }
+.tb-btn.active { background: rgba(249,194,43,.35); border-color: #F9C22B; color: #F9C22B; }
+
+.tb-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255,255,255,.45);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0 4px;
+  white-space: nowrap;
+}
+
+.tb-color-pick {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,.3);
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+.tb-select {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff;
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+}
+.tb-select option { background: #1a1a2e; color: #fff; }
+
+#tb-save-msg {
+  font-size: 12px;
+  color: #4CAF50;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity .4s;
+  padding: 0 8px;
+}
+
+/* Settings Panel */
+#settings-panel {
+  position: fixed;
+  top: 0; right: 0;
+  width: 300px;
+  height: 100vh;
+  z-index: 9997;
+  background: linear-gradient(180deg, #1a1a2e, #0f3460);
+  box-shadow: -6px 0 30px rgba(0,0,0,.4);
+  padding: 70px 20px 20px;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+#settings-panel.show { display: flex; }
+
+.sp-section {
+  background: rgba(255,255,255,.06);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.1);
+}
+.sp-section h4 {
+  font-size: 11px;
+  font-weight: 800;
+  color: #F9C22B;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.sp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+.sp-row:last-child { margin-bottom: 0; }
+.sp-row label {
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+  font-weight: 700;
+  flex: 1;
+}
+.sp-row input[type=color] {
+  width: 36px; height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.2);
+  cursor: pointer;
+  padding: 1px 3px;
+  background: none;
+}
+.sp-row input[type=range] {
+  width: 100px;
+  accent-color: #F9C22B;
+}
+.sp-row input[type=text] {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-family: 'Nunito', sans-serif;
+  width: 160px;
+}
+.sp-row select {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px;
+  color: #fff;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: 'Nunito', sans-serif;
+}
+.sp-row select option { background: #1a1a2e; }
+.sp-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all .2s;
+  margin-top: 4px;
+}
+.sp-btn-primary { background: linear-gradient(135deg, #F9C22B, #E0A800); color: #1a1a1a; }
+.sp-btn-danger { background: rgba(239,83,80,.2); color: #EF5350; border: 1px solid rgba(239,83,80,.3); }
+.sp-btn:hover { transform: scale(1.03); }
+
+/* Edit mode body shift */
+body.edit-mode { padding-top: 58px; }
+body.edit-mode #app { margin-right: 310px; }
+
+/* Editable element highlight */
+body.edit-mode [contenteditable="true"] {
+  outline: 2px dashed rgba(249,194,43,.5) !important;
+  border-radius: 4px;
+  cursor: text;
+  min-height: 1em;
+  position: relative;
+}
+body.edit-mode [contenteditable="true"]:hover {
+  outline-color: #F9C22B !important;
+  background: rgba(249,194,43,.06) !important;
+}
+body.edit-mode [contenteditable="true"]:focus {
+  outline: 2px solid #F9C22B !important;
+  background: rgba(249,194,43,.08) !important;
+}
+
+/* Edit mode indicator badge */
+#edit-indicator {
+  position: fixed;
+  top: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(249,194,43,.95);
+  color: #1a1a1a;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 16px;
+  border-radius: 99px;
+  z-index: 9996;
+  display: none;
+  letter-spacing: .5px;
+  box-shadow: 0 4px 14px rgba(249,194,43,.4);
+}
+#edit-indicator.show { display: block; }
+
+@media(max-width:600px){
+  body.edit-mode #app { margin-right: 0; }
+  #settings-panel { width: 100%; height: 50vh; top: auto; bottom: 0; padding: 16px; border-radius: 20px 20px 0 0; }
+  #edit-toggle { bottom: 14px; right: 14px; padding: 10px 14px; font-size: 12px; }
+}
+</style>
+</head>
+<body class="">
+
+<!-- ===== EDITOR TOOLBAR ===== -->
+<div id="editor-toolbar" class="">
+  <span class="tb-label">✏️ Mode Edit</span>
+
+  <div class="tb-group">
+    <span class="tb-label">Teks</span>
+    <button class="tb-btn" onclick="fmt('bold')" title="Bold"><b>B</b></button>
+    <button class="tb-btn" onclick="fmt('italic')" title="Italic"><i>I</i></button>
+    <button class="tb-btn" onclick="fmt('underline')" title="Underline"><u>U</u></button>
+    <button class="tb-btn" onclick="fmt('strikeThrough')" title="Coret">S̶</button>
+  </div>
+
+  <div class="tb-group">
+    <span class="tb-label">Ukuran</span>
+    <select class="tb-select" onchange="setFontSize(this.value)">
+      <option value="">Pilih</option>
+      <option value="11px">Kecil (11)</option>
+      <option value="13px">Normal (13)</option>
+      <option value="15px">Sedang (15)</option>
+      <option value="18px">Besar (18)</option>
+      <option value="22px">Sangat Besar (22)</option>
+    </select>
+  </div>
+
+  <div class="tb-group">
+    <span class="tb-label">Rata</span>
+    <button class="tb-btn" onclick="fmt('justifyLeft')" title="Kiri">≡L</button>
+    <button class="tb-btn" onclick="fmt('justifyCenter')" title="Tengah">≡C</button>
+    <button class="tb-btn" onclick="fmt('justifyRight')" title="Kanan">≡R</button>
+  </div>
+
+  <div class="tb-group">
+    <span class="tb-label">Warna Teks</span>
+    <input type="color" class="tb-color-pick" value="#2C3E50" oninput="setColor(this.value)" title="Warna Teks">
+  </div>
+
+  <div class="tb-group">
+    <button class="tb-btn" onclick="fmt('removeFormat')" title="Hapus Format">✕ Format</button>
+    <button class="tb-btn" onclick="undoEdit()" title="Undo">↩ Undo</button>
+    <button class="tb-btn" onclick="redoEdit()" title="Redo">↪ Redo</button>
+  </div>
+
+  <div class="tb-group">
+    <button class="tb-btn" onclick="toggleSettings()" id="tb-settings-btn">⚙️ Pengaturan</button>
+    <button class="tb-btn" onclick="saveContent()" style="background:rgba(76,175,80,.3);border-color:#4CAF50;">💾 Simpan</button>
+    <button class="tb-btn" onclick="downloadHTML()" style="background:rgba(33,150,243,.3);border-color:#2196F3;">⬇️ Download</button>
+  </div>
+
+  <span id="tb-save-msg" style="opacity: 0;">✅ Tersimpan!</span>
+</div>
+
+<!-- Edit Indicator -->
+<div id="edit-indicator" class="">✏️ MODE EDIT AKTIF — Klik teks untuk mengedit</div>
+
+<!-- ===== SETTINGS PANEL ===== -->
+<div id="settings-panel">
+  <div class="sp-section">
+    <h4>🎨 Warna Tema</h4>
+    <div class="sp-row">
+      <label>Warna Utama</label>
+      <input type="color" value="#1565C0" oninput="changeCSSVar('--sky-dark', this.value)">
+    </div>
+    <div class="sp-row">
+      <label>Warna Aksen</label>
+      <input type="color" value="#F9C22B" oninput="changeCSSVar('--gold', this.value)">
+    </div>
+    <div class="sp-row">
+      <label>Warna Hijau</label>
+      <input type="color" value="#5DB85C" oninput="changeCSSVar('--green', this.value)">
+    </div>
+    <div class="sp-row">
+      <label>Warna Coral</label>
+      <input type="color" value="#F97B5B" oninput="changeCSSVar('--coral', this.value)">
+    </div>
+    <div class="sp-row">
+      <label>Warna Ungu</label>
+      <input type="color" value="#9B72CF" oninput="changeCSSVar('--purple', this.value)">
+    </div>
+    <div class="sp-row">
+      <label>Warna Background Card</label>
+      <input type="color" value="#FFFDF7" oninput="changeCSSVar('--white', this.value)">
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <h4>🖋️ Font &amp; Teks</h4>
+    <div class="sp-row">
+      <label>Font Utama</label>
+      <select onchange="changeFontBody(this.value)">
+        <option value="'Nunito', sans-serif">Nunito</option>
+        <option value="'Segoe UI', sans-serif">Segoe UI</option>
+        <option value="Georgia, serif">Georgia</option>
+        <option value="'Courier New', monospace">Courier</option>
+        <option value="Arial, sans-serif">Arial</option>
+      </select>
+    </div>
+    <div class="sp-row">
+      <label>Ukuran Teks Dasar</label>
+      <input type="range" min="12" max="18" value="14" oninput="changeBaseFontSize(this.value)">
+    </div>
+    <div class="sp-row">
+      <label>Warna Teks</label>
+      <input type="color" value="#2C3E50" oninput="changeCSSVar('--text', this.value)">
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <h4>🌅 Background Halaman</h4>
+    <div class="sp-row">
+      <label>Warna BG Atas</label>
+      <input type="color" value="#87CEEB" oninput="changeBGColor('top', this.value)" id="bg-top">
+    </div>
+    <div class="sp-row">
+      <label>Warna BG Bawah</label>
+      <input type="color" value="#D4EDFF" oninput="changeBGColor('bottom', this.value)" id="bg-bottom">
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <h4>📐 Layout</h4>
+    <div class="sp-row">
+      <label>Lebar Konten</label>
+      <select onchange="changeMaxWidth(this.value)">
+        <option value="900px">Normal (900px)</option>
+        <option value="800px">Sempit (800px)</option>
+        <option value="1100px">Lebar (1100px)</option>
+        <option value="100%">Penuh</option>
+      </select>
+    </div>
+    <div class="sp-row">
+      <label>Radius Kartu</label>
+      <input type="range" min="8" max="36" value="22" oninput="changeCSSVarPx('--radius', this.value)">
+    </div>
+  </div>
+
+  <div class="sp-section">
+    <h4>🔧 Aksi</h4>
+    <button class="sp-btn sp-btn-primary" onclick="saveContent()">💾 Simpan Perubahan</button>
+    <button class="sp-btn sp-btn-primary" onclick="downloadHTML()" style="margin-top:8px;">⬇️ Download HTML</button>
+    <button class="sp-btn sp-btn-danger" onclick="resetAllChanges()" style="margin-top:8px;">🔄 Reset Semua</button>
+  </div>
+</div>
+
+<!-- Edit Mode Toggle -->
+<button id="edit-toggle" onclick="toggleEditMode()">✏️ Mode Edit</button>
+
+<!-- Decorations -->
+<span class="cloud-deco" style="left:2%">☁️</span>
+<span class="cloud-deco" style="right:3%;animation-delay:2s">☁️</span>
+<span class="star" style="left:5%;top:15%;animation-delay:.5s">✨</span>
+<span class="star" style="right:7%;top:25%;animation-delay:1.5s">⭐</span>
+<span class="star" style="left:12%;top:60%;animation-delay:2.5s">✨</span>
+<span class="star" style="right:10%;top:70%;animation-delay:3s">⭐</span>
+
+<div id="app">
+
+  <!-- TOP HEADER -->
+  <div class="top-header">
+    <span class="moon-emoji">🌙</span>
+    <div class="badge-top">📚 PAI SD/MI Kelas II · Semester Genap · Strategi: Deep Learning</div>
+    <h1>Mari Mengenal Malaikat-Malaikat Allah ✨</h1>
+    <p>Media Pembelajaran Interaktif | Deep Learning: Mindful · Meaningful · Joyful | Hasna Izzatul Aisy · 054774697</p>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="nav-tabs">
+    <button class="tab-btn t0 active" onclick="showTab(0)">🏠 Beranda</button>
+    <button class="tab-btn t1" onclick="showTab(1)">📖 Pertemuan 1</button>
+    <button class="tab-btn t2" onclick="showTab(2)">🌟 Pertemuan 2</button>
+    <button class="tab-btn t3" onclick="showTab(3)">📋 Pertemuan 3</button>
+    <button class="tab-btn t4" onclick="showTab(4)">🎭 Pertemuan 4</button>
+    <button class="tab-btn t5" onclick="showTab(5)">📝 Kuis</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 0: BERANDA / COVER
+  ══════════════════════════════════════════════ -->
+  <div class="panel active" id="panel-0">
+    <div class="card">
+      <div class="card-head head-connect" style="background:linear-gradient(135deg,#0D47A1,#1565C0,#1976D2);">
+        <div class="stage-badge">✨ SELAMAT DATANG</div>
+        <h2>Bismillahirrahmanirrahim 🌙</h2>
+      </div>
+      <div class="card-body">
+        <div class="cover-grid">
+          <div class="cover-info-box">
+            <h4>🏫 Mata Pelajaran</h4>
+            <p>Pendidikan Agama Islam (PAI)</p>
+          </div>
+          <div class="cover-info-box">
+            <h4>📚 Kelas / Semester</h4>
+            <p>Kelas II / Semester Genap</p>
+          </div>
+          <div class="cover-info-box">
+            <h4>📖 Bab</h4>
+            <p>Mari Mengenal Malaikat-Malaikat Allah</p>
+          </div>
+          <div class="cover-info-box">
+            <h4>⏱ Alokasi Waktu</h4>
+            <p>4 Pertemuan × 35 Menit</p>
+          </div>
+          <div class="cover-info-box" style="border-left-color:var(--green);">
+            <h4>🎯 Strategi</h4>
+            <p>Deep Learning (Mindful · Meaningful · Joyful)</p>
+          </div>
+          <div class="cover-info-box" style="border-left-color:var(--gold);">
+            <h4>👩‍🏫 Guru PAI</h4>
+            <p>Hasna Izzatul Aisy<br><span style="font-size:11px;color:#888;">NIM: 054774697</span></p>
+          </div>
+        </div>
+
+        <div class="section-lbl">🎯 Tujuan Pembelajaran</div>
+        <ul class="tujuan-list">
+          <li>Menjelaskan pengertian malaikat dengan tepat</li>
+          <li>Menyebutkan sifat-sifat malaikat berdasarkan Al-Qur'an dan Hadis</li>
+          <li>Mengidentifikasi perbedaan malaikat, manusia, dan jin</li>
+          <li>Mendeskripsikan makna beriman kepada malaikat secara komprehensif</li>
+          <li>Menjelaskan pentingnya beriman kepada malaikat dalam kehidupan sehari-hari</li>
+          <li>Memberikan contoh sikap yang mencerminkan keimanan kepada malaikat</li>
+          <li>Menyebutkan nama-nama malaikat Allah dengan benar</li>
+          <li>Menjelaskan tugas masing-masing malaikat</li>
+          <li>Menjelaskan hubungan tugas malaikat dengan kehidupan manusia</li>
+          <li>Menunjukkan perilaku sehari-hari sebagai wujud iman kepada malaikat</li>
+        </ul>
+
+        <div class="fun-fact">
+          <strong>🌙 Pemahaman Bermakna:</strong><br>
+          Iman kepada malaikat mengajarkan kita untuk selalu berbuat baik, jujur, dan berhati-hati karena setiap perbuatan akan dicatat oleh malaikat Raqib dan Atid.
+        </div>
+
+        <div class="section-lbl">✨ Dimensi Profil Lulusan</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0;">
+          <div style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-radius:12px;padding:12px 16px;flex:1;min-width:140px;text-align:center;">
+            <div style="font-size:24px;margin-bottom:4px;">🤲</div>
+            <div style="font-size:12px;font-weight:800;color:#1565C0;">Beriman &amp; Bertakwa<br>Berakhlak Mulia</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:12px;padding:12px 16px;flex:1;min-width:140px;text-align:center;">
+            <div style="font-size:24px;margin-bottom:4px;">🤝</div>
+            <div style="font-size:12px;font-weight:800;color:#2E7D32;">Bergotong<br>Royong</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:12px;padding:12px 16px;flex:1;min-width:140px;text-align:center;">
+            <div style="font-size:24px;margin-bottom:4px;">🌟</div>
+            <div style="font-size:12px;font-weight:800;color:#E65100;">Mandiri</div>
+          </div>
+        </div>
+
+        <div class="section-lbl">❓ Pertanyaan Pemantik</div>
+        <div class="pemantik-box">
+          <h3>💡 Sebelum Belajar, Pikirkan Ini:</h3>
+          <div class="q-item">Mengapa kita harus selalu berbuat baik?</div>
+          <div class="q-item">Apa yang terjadi jika tidak ada malaikat yang mencatat amal kita?</div>
+        </div>
+
+        <div class="nav-btns" style="justify-content:center; margin-top:20px;">
+          <button class="btn-next" onclick="showTab(1)">Mulai Belajar! →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 1: PERTEMUAN 1: Siapakah Malaikat Itu?
+  ══════════════════════════════════════════════ -->
+  <div class="panel" id="panel-1">
+
+    <!-- CONNECTING -->
+    <div class="card">
+      <div class="card-head head-connect">
+        <div class="stage-badge">🔗 TAHAP 1: CONNECTING</div>
+        <h2>Menghubungkan dengan Pengalaman Kita 🤝</h2>
+      </div>
+      <div class="card-body">
+        <p>Halo teman-teman! Sebelum belajar, yuk kita pikirkan dulu pertanyaan seru ini! 🎉</p>
+        <div class="pemantik-box">
+          <h3>💡 Pertanyaan Pemantik:</h3>
+          <div class="q-item">Siapa yang suka berbuat baik, seperti menolong teman?</div>
+          <div class="q-item">Tahukah kalian ada malaikat yang selalu mencatat perbuatan kita?</div>
+          <div class="q-item">Mengapa kita harus selalu berbuat baik?</div>
+        </div>
+        <p>Mengenal malaikat membantu kita untuk selalu <strong>berbuat baik</strong> setiap hari. Mari kita belajar bersama! 😊</p>
+      </div>
+    </div>
+
+    <!-- EXPERIENCING -->
+    <div class="card">
+      <div class="card-head head-experience">
+        <div class="stage-badge">🎭 TAHAP 2: EXPERIENCING</div>
+        <h2>Belajar Langsung: Kisah Malaikat Jibril 📖</h2>
+      </div>
+      <div class="card-body">
+        <p>🌟 <strong>Kisah Malaikat Jibril yang Mulia!</strong></p>
+        <p>Malaikat Jibril adalah malaikat yang paling utama. Tugasnya sangat penting, yaitu <strong>menyampaikan wahyu (firman Allah)</strong> kepada para Nabi dan Rasul. Malaikat Jibril yang menyampaikan Al-Qur'an kepada Nabi Muhammad ﷺ. Subhanallah! 🌟</p>
+
+        <div class="section-lbl">🃏 Kartu Nama Malaikat, Klik untuk Belajar!</div>
+        <div class="angel-cards-grid" id="angel-cards-p1"></div>
+
+        <div class="section-lbl">✍️ Ayo Tirukan Nama Malaikat!</div>
+        <p>Guru membacakan, siswa menirukan dengan semangat:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;">
+          <span onclick="this.style.background='#FFD700';this.style.transform='scale(1.1)'" style="background:#E3F2FD;border:2px solid #90CAF9;border-radius:99px;padding:8px 16px;font-weight:800;font-size:13px;color:#1565C0;cursor:pointer;transition:all .2s;">Jibril</span>
+          <span onclick="this.style.background='#FFD700';this.style.transform='scale(1.1)'" style="background:#E3F2FD;border:2px solid #90CAF9;border-radius:99px;padding:8px 16px;font-weight:800;font-size:13px;color:#1565C0;cursor:pointer;transition:all .2s;">Mikail</span>
+          <span onclick="this.style.background='#FFD700';this.style.transform='scale(1.1)'" style="background:#E3F2FD;border:2px solid #90CAF9;border-radius:99px;padding:8px 16px;font-weight:800;font-size:13px;color:#1565C0;cursor:pointer;transition:all .2s;">Israfil</span>
+          <span onclick="this.style.background='#FFD700';this.style.transform='scale(1.1)'" style="background:#E3F2FD;border:2px solid #90CAF9;border-radius:99px;padding:8px 16px;font-weight:800;font-size:13px;color:#1565C0;cursor:pointer;transition:all .2s;">Izrail</span>
+          <span onclick="this.style.background='#FFD700';this.style.transform='scale(1.1)'" style="background:#E3F2FD;border:2px solid #90CAF9;border-radius:99px;padding:8px 16px;font-weight:800;font-size:13px;color:#1565C0;cursor:pointer;transition:all .2s;">Raqib</span>
+          <span onclick="this.style.background='#FFD700';this.style.transform='scale(1.1)'" style="background:#E3F2FD;border:2px solid #90CAF9;border-radius:99px;padding:8px 16px;font-weight:800;font-size:13px;color:#1565C0;cursor:pointer;transition:all .2s;">Atid</span>
+        </div>
+        <p style="font-size:12px;color:#888;">💡 Klik nama malaikat untuk "menirukan" bersama guru, beri warna emas! Aktivitas: Siswa memasangkan kartu nama malaikat dengan tugasnya.</p>
+      </div>
+    </div>
+
+    <!-- THINKING -->
+    <div class="card">
+      <div class="card-head head-think">
+        <div class="stage-badge">🧠 TAHAP 3: THINKING &amp; REASONING</div>
+        <h2>Ayo Berpikir Bersama! 💭</h2>
+      </div>
+      <div class="card-body">
+        <div class="pemantik-box" style="background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border-color:var(--purple);">
+          <h3 style="color:var(--purple);">🤔 Diskusi Kita:</h3>
+          <div class="q-item" style="color:#4A148C;">Mengapa kita perlu beriman kepada malaikat?</div>
+          <div class="q-item" style="color:#4A148C;">Apa yang akan dicatat malaikat Raqib dan Atid jika kita berbuat baik atau buruk?</div>
+        </div>
+        <p>Beriman kepada malaikat membuat kita lebih <strong>hati-hati</strong> dalam berperilaku. Karena kita tahu Allah selalu mengawasi melalui malaikat-Nya! 👁️</p>
+        <div class="fun-fact">
+          <strong>🌙 Tahukah Kamu?</strong><br>
+          Malaikat diciptakan dari <strong>cahaya (nur)</strong>. Mereka tidak pernah membantah perintah Allah dan selalu taat. Berbeda dengan manusia dan jin yang bisa memilih.
+        </div>
+      </div>
+    </div>
+
+    <!-- DEEPENING -->
+    <div class="card">
+      <div class="card-head head-deep">
+        <div class="stage-badge">🌿 TAHAP 4: DEEPENING</div>
+        <h2>Pendalaman Nilai &amp; Teladan 💚</h2>
+      </div>
+      <div class="card-body">
+        <p>Malaikat mengajarkan kita untuk:</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0;">
+          <div style="background:#E8F5E9;border-radius:12px;padding:12px 16px;border-left:4px solid #4CAF50;font-size:14px;color:#2E7D32;font-weight:700;">
+            ✅ Rajin beribadah, seperti malaikat yang selalu taat kepada Allah
+          </div>
+          <div style="background:#E8F5E9;border-radius:12px;padding:12px 16px;border-left:4px solid #4CAF50;font-size:14px;color:#2E7D32;font-weight:700;">
+            ✅ Menghindari perbuatan buruk, karena selalu dicatat malaikat Atid
+          </div>
+          <div style="background:#E8F5E9;border-radius:12px;padding:12px 16px;border-left:4px solid #4CAF50;font-size:14px;color:#2E7D32;font-weight:700;">
+            ✅ Selalu berbuat baik, karena malaikat Raqib mencatat kebaikan kita
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#FFF9C4,#FFFDE7);border-radius:14px;padding:16px;text-align:center;margin:14px 0;border:2px solid var(--gold);">
+          <div style="font-size:32px;margin-bottom:8px;">🕊️</div>
+          <p style="font-family:'Fredoka One',cursive;font-size:16px;color:#B8860B;margin:0;">"Aku ingin menjadi anak baik yang disukai malaikat!" 💛</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRANSFERRING -->
+    <div class="card">
+      <div class="card-head head-transfer">
+        <div class="stage-badge">🏠 TAHAP 5: TRANSFERRING</div>
+        <h2>Ayo Kita Terapkan! 🌟</h2>
+      </div>
+      <div class="card-body">
+        <p>Guru memberi contoh: selalu jujur, rajin berdoa, dan berkata baik. <strong>Tugas Rumah:</strong> Catat 3 perbuatan baik yang sudah dilakukan hari ini, lalu bacakan di kelas keesokan harinya! 📔</p>
+
+        <div class="jurnal-box" style="margin-top:14px;">
+          <h3>📔 Jurnal Amal Harianku</h3>
+          <div class="jurnal-item" onclick="checkJurnal(this)">
+            <div class="jurnal-check">☐</div>
+            <div class="jurnal-text">🙏 Berdoa sebelum dan sesudah belajar</div>
+          </div>
+          <div class="jurnal-item" onclick="checkJurnal(this)">
+            <div class="jurnal-check">☐</div>
+            <div class="jurnal-text">🤝 Menolong teman yang kesulitan</div>
+          </div>
+          <div class="jurnal-item" onclick="checkJurnal(this)">
+            <div class="jurnal-check">☐</div>
+            <div class="jurnal-text">💬 Berkata jujur kepada orang tua dan guru</div>
+          </div>
+          <div class="jurnal-item" onclick="checkJurnal(this)">
+            <div class="jurnal-check">☐</div>
+            <div class="jurnal-text">🧹 Membantu membereskan kelas</div>
+          </div>
+          <div class="jurnal-item" onclick="checkJurnal(this)">
+            <div class="jurnal-check">☐</div>
+            <div class="jurnal-text">📚 Rajin belajar dan mengerjakan PR</div>
+          </div>
+          <div class="jurnal-footer">
+            <div class="jurnal-progress" id="jurnal-score-1">0 / 5 ⭐ perbuatan baik hari ini!</div>
+          </div>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-prev" onclick="showTab(0)">← Beranda</button>
+          <button class="btn-next" onclick="showTab(2)">Pertemuan 2 →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 2: PERTEMUAN 2: Pengertian Beriman kepada Malaikat
+  ══════════════════════════════════════════════ -->
+  <div class="panel" id="panel-2">
+
+    <div class="card">
+      <div class="card-head head-connect">
+        <div class="stage-badge">🔗 TAHAP 1: CONNECTING</div>
+        <h2>Ada Siapa yang Menjaga Kita? 🌙</h2>
+      </div>
+      <div class="card-body">
+        <div class="pemantik-box">
+          <h3>💡 Pertanyaan Pemantik:</h3>
+          <div class="q-item">Siapa yang pernah mendengar kata "malaikat"?</div>
+          <div class="q-item">Ketika kamu membaca doa tidur, ada siapa yang menjaga kita saat tidur?</div>
+          <div class="q-item">Apakah kamu tahu Allah menciptakan makhluk khusus selain manusia?</div>
+        </div>
+        <p>Allah Swt. menciptakan malaikat untuk menjaga dan mengurus berbagai urusan di alam semesta ini. Subhanallah! ✨</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-experience">
+        <div class="stage-badge">🎭 TAHAP 2: EXPERIENCING</div>
+        <h2>Mengenal Malaikat Allah 🌟</h2>
+      </div>
+      <div class="card-body">
+        <div style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-radius:16px;padding:20px;margin:10px 0;text-align:center;">
+          <div style="font-size:48px;margin-bottom:10px;">🕊️✨</div>
+          <p style="font-family:'Fredoka One',cursive;font-size:18px;color:#1565C0;margin:0;">
+            "Malaikat adalah makhluk Allah yang selalu taat dan tidak pernah membantah perintah-Nya"
+          </p>
+        </div>
+
+        <div class="section-lbl">📋 Sifat-Sifat Malaikat Allah</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+          <div style="background:#E8F5E9;border-radius:12px;padding:14px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:6px;">💡</div>
+            <div style="font-size:13px;font-weight:800;color:#2E7D32;">Diciptakan dari<br>Cahaya (Nur)</div>
+          </div>
+          <div style="background:#E3F2FD;border-radius:12px;padding:14px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:6px;">🙏</div>
+            <div style="font-size:13px;font-weight:800;color:#1565C0;">Selalu Taat<br>kepada Allah</div>
+          </div>
+          <div style="background:#FFF3E0;border-radius:12px;padding:14px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:6px;">🚫</div>
+            <div style="font-size:13px;font-weight:800;color:#E65100;">Tidak Makan<br>dan Minum</div>
+          </div>
+          <div style="background:#FCE4EC;border-radius:12px;padding:14px;text-align:center;">
+            <div style="font-size:28px;margin-bottom:6px;">❤️</div>
+            <div style="font-size:13px;font-weight:800;color:#880E4F;">Tidak Berbuat<br>Dosa</div>
+          </div>
+        </div>
+
+        <div class="section-lbl">⚖️ Perbedaan Malaikat, Manusia, dan Jin</div>
+        <div style="overflow-x:auto;margin:10px 0;">
+          <table class="angel-table">
+            <thead>
+              <tr>
+                <th>Aspek</th>
+                <th>👼 Malaikat</th>
+                <th>🧑 Manusia</th>
+                <th>🔥 Jin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Diciptakan dari</td><td>Cahaya (Nur)</td><td>Tanah (sari pati)</td><td>Api</td></tr>
+              <tr><td>Makan &amp; Minum</td><td>Tidak</td><td>Ya</td><td>Bisa</td></tr>
+              <tr><td>Bisa dilihat</td><td>Tidak (umumnya)</td><td>Ya</td><td>Tidak (umumnya)</td></tr>
+              <tr><td>Kepatuhan kpd Allah</td><td>Selalu taat</td><td>Bisa taat/tidak</td><td>Bisa taat/tidak</td></tr>
+              <tr><td>Berbuat dosa</td><td>Tidak pernah</td><td>Bisa</td><td>Bisa</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="background:#F3E5F5;border-radius:12px;padding:12px 16px;margin:10px 0;">
+          <p style="margin:0;font-size:14px;font-weight:700;color:#4A148C;">🎤 Siswa menirukan: <em>"Beriman kepada malaikat artinya percaya bahwa malaikat itu ada!"</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-think">
+        <div class="stage-badge">🧠 TAHAP 3: THINKING &amp; REASONING</div>
+        <h2>Ayo Berpikir! Kalau Malaikat Taat... 🤔</h2>
+      </div>
+      <div class="card-body">
+        <p>Guru bertanya: <em>"Kalau malaikat itu selalu taat, kira-kira apa yang harus kita lakukan sebagai anak yang beriman kepada malaikat?"</em></p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">🙏 Berdoa kepada Allah</div>
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">🕌 Rajin shalat</div>
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">👨‍👩‍👧 Patuh kepada orang tua</div>
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">🤝 Berbuat baik kepada teman</div>
+        </div>
+        <p><strong>"Beriman kepada malaikat membuat kita rajin berbuat baik!"</strong> 💚</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-deep">
+        <div class="stage-badge">🌿 TAHAP 4: DEEPENING</div>
+        <h2>Kesimpulan &amp; Doa Bersama 🤲</h2>
+      </div>
+      <div class="card-body">
+        <div style="background:linear-gradient(135deg,#0D47A1,#1565C0);border-radius:16px;padding:20px;text-align:center;margin:10px 0;">
+          <p style="color:#FFD700;font-family:'Fredoka One',cursive;font-size:15px;margin-bottom:8px;">Kesimpulan Kita Hari Ini:</p>
+          <p style="color:#fff;font-size:14px;font-weight:700;line-height:1.7;margin:0;">
+            "Beriman kepada malaikat berarti percaya bahwa<br>malaikat itu <span style="color:#FFD700">ada</span>, adalah <span style="color:#FFD700">ciptaan Allah</span>, dan <span style="color:#FFD700">selalu taat</span> kepada Allah."
+          </p>
+        </div>
+        <div style="background:#FFF3E0;border-radius:14px;padding:16px;text-align:center;margin:12px 0;border:2px solid #FFB74D;">
+          <p style="font-size:13px;color:#E65100;font-weight:700;margin-bottom:8px;">🤲 Yuk kita berdoa bersama:</p>
+          <p style="font-family:'Fredoka One',cursive;font-size:16px;color:#BF360C;margin:0;">"Ya Allah, tambahkan iman kami kepada-Mu" 💛</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-transfer">
+        <div class="stage-badge">🏠 TAHAP 5: TRANSFERRING</div>
+        <h2>Satu Perbuatan Baik Hariku! ⭐</h2>
+      </div>
+      <div class="card-body">
+        <p>Karena kita tahu malaikat mencatat amal baik, sebutkan <strong>1 contoh perbuatan baik</strong> yang akan kamu lakukan hari ini!</p>
+        <div id="transfer-p2-answers" style="display:flex;flex-direction:column;gap:8px;margin:12px 0;"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;">
+          <button onclick="addGoodDeed('🙏 Shalat tepat waktu')" style="background:#E8F5E9;border:2px solid #4CAF50;border-radius:99px;padding:8px 16px;font-size:13px;font-weight:700;color:#2E7D32;cursor:pointer;">+ Shalat tepat waktu</button>
+          <button onclick="addGoodDeed('💬 Berkata jujur')" style="background:#E8F5E9;border:2px solid #4CAF50;border-radius:99px;padding:8px 16px;font-size:13px;font-weight:700;color:#2E7D32;cursor:pointer;">+ Berkata jujur</button>
+          <button onclick="addGoodDeed('🤝 Membantu teman')" style="background:#E8F5E9;border:2px solid #4CAF50;border-radius:99px;padding:8px 16px;font-size:13px;font-weight:700;color:#2E7D32;cursor:pointer;">+ Membantu teman</button>
+          <button onclick="addGoodDeed('👨‍👩‍👧 Patuh orang tua')" style="background:#E8F5E9;border:2px solid #4CAF50;border-radius:99px;padding:8px 16px;font-size:13px;font-weight:700;color:#2E7D32;cursor:pointer;">+ Patuh orang tua</button>
+        </div>
+        <div class="nav-btns">
+          <button class="btn-prev" onclick="showTab(1)">← Pertemuan 1</button>
+          <button class="btn-next" onclick="showTab(3)">Pertemuan 3 →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 3: PERTEMUAN 3: Nama & Tugas Malaikat
+  ══════════════════════════════════════════════ -->
+  <div class="panel" id="panel-3">
+
+    <div class="card">
+      <div class="card-head head-connect">
+        <div class="stage-badge">🔗 TAHAP 1: CONNECTING</div>
+        <h2>Siapa yang Mencatat Doa Kita? 📝</h2>
+      </div>
+      <div class="card-body">
+        <div class="pemantik-box">
+          <h3>💡 Pertanyaan Pemantik:</h3>
+          <div class="q-item">Kalau kalian rajin berdoa, siapa yang mencatat kebaikan kita?</div>
+          <div class="q-item">Siapa yang mengatur rezeki kita sehari-hari?</div>
+          <div class="q-item">Siapa yang akan meniup terompet (sangkakala) pada hari kiamat?</div>
+        </div>
+        <p>Allah Swt. menciptakan malaikat untuk melaksanakan tugas-tugas tertentu. Mari kita kenali satu per satu! 🌟</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-experience">
+        <div class="stage-badge">🎭 TAHAP 2: EXPERIENCING</div>
+        <h2>10 Malaikat Allah &amp; Tugasnya 📋</h2>
+      </div>
+      <div class="card-body">
+        <p>Berikut adalah 10 malaikat yang wajib kita ketahui. Yuk baca dengan ceria! 😊</p>
+        <div style="overflow-x:auto;">
+          <table class="angel-table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>🌟 Nama Malaikat</th>
+                <th>📋 Tugasnya</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1.</td><td>Jibril</td><td>Menyampaikan wahyu kepada para Nabi dan Rasul</td></tr>
+              <tr><td>2.</td><td>Mikail</td><td>Mengatur dan membagi rezeki makhluk Allah</td></tr>
+              <tr><td>3.</td><td>Israfil</td><td>Meniup sangkakala (terompet) pada hari kiamat</td></tr>
+              <tr><td>4.</td><td>Izrail</td><td>Mencabut nyawa semua makhluk yang hidup</td></tr>
+              <tr><td>5.</td><td>Raqib</td><td>Mencatat amal baik manusia</td></tr>
+              <tr><td>6.</td><td>Atid</td><td>Mencatat amal buruk manusia</td></tr>
+              <tr><td>7.</td><td>Munkar</td><td>Menanya di dalam kubur</td></tr>
+              <tr><td>8.</td><td>Nakir</td><td>Menanya di dalam kubur (bersama Munkar)</td></tr>
+              <tr><td>9.</td><td>Malik</td><td>Menjaga pintu neraka</td></tr>
+              <tr><td>10.</td><td>Ridwan</td><td>Menjaga pintu surga</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-lbl">🃏 Game: Pasangkan Malaikat dengan Tugasnya!</div>
+        <div class="match-section" id="match-game-p3">
+    <div class="match-instruction">Klik nama malaikat, lalu klik tugasnya! 🎯</div>
+    <div class="match-score">⭐ Skor: <span id="mscore">0</span> / <span id="mtotal">8</span></div>
+    <div class="match-cols">
+      <div>
+        <h4 class="left-h">🌟 Nama Malaikat</h4>
+        <div class="match-item angel-item" data-type="angel" data-name="Izrail" onclick="selectMatch(this)">Izrail</div><div class="match-item angel-item" data-type="angel" data-name="Israfil" onclick="selectMatch(this)">Israfil</div><div class="match-item angel-item" data-type="angel" data-name="Mikail" onclick="selectMatch(this)">Mikail</div><div class="match-item angel-item" data-type="angel" data-name="Jibril" onclick="selectMatch(this)">Jibril</div><div class="match-item angel-item" data-type="angel" data-name="Raqib" onclick="selectMatch(this)">Raqib</div><div class="match-item angel-item" data-type="angel" data-name="Atid" onclick="selectMatch(this)">Atid</div>
+      </div>
+      <div>
+        <h4 class="right-h">📋 Tugasnya</h4>
+        <div class="match-item task-item" data-type="task" data-name="Israfil" onclick="selectMatch(this)">Meniup sangkakala</div><div class="match-item task-item" data-type="task" data-name="Jibril" onclick="selectMatch(this)">Menyampaikan wahyu</div><div class="match-item task-item" data-type="task" data-name="Raqib" onclick="selectMatch(this)">Mencatat amal baik</div><div class="match-item task-item" data-type="task" data-name="Izrail" onclick="selectMatch(this)">Mencabut nyawa</div><div class="match-item task-item" data-type="task" data-name="Mikail" onclick="selectMatch(this)">Mengatur rezeki</div><div class="match-item task-item" data-type="task" data-name="Atid" onclick="selectMatch(this)">Mencatat amal buruk</div>
+      </div>
+    </div>
+    <div class="match-result" id="match-result">
+      <div style="font-size:40px;">🎉</div>
+      <div style="font-family:'Fredoka One',cursive;font-size:20px;color:#2E7D32;">Luar Biasa! Kamu Hebat!</div>
+      <div style="font-size:14px;color:#555;margin:8px 0;">Semua malaikat berhasil dipasangkan! MasyaAllah! ✨</div>
+      <button onclick="resetMatch()" style="background:linear-gradient(135deg,#5DB85C,#3DA33C);color:#fff;border:none;border-radius:99px;padding:10px 24px;font-size:14px;font-weight:800;cursor:pointer;margin-top:8px;">🔄 Main Lagi</button>
+    </div>
+  </div>
+      </div>
+    </div>
+
+    <!-- YEL-YEL -->
+    <div class="card">
+      <div class="card-head head-deep">
+        <div class="stage-badge">🌿 TAHAP 4: DEEPENING</div>
+        <h2>Yel-Yel Malaikat! 🎉 (Joyful Learning)</h2>
+      </div>
+      <div class="card-body">
+        <div class="yel-container">
+          <p class="yel-title">🎤 Klik nama malaikat, lalu teriakkan tugasnya!</p>
+          <div class="yel-grid" id="yel-grid"></div>
+          <button class="yel-all-btn" onclick="showAllChant()">🎊 Yel-Yel Penuh! Semua Bersama!</button>
+          <div class="yel-chant-display" id="yel-chant"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-think">
+        <div class="stage-badge">🧠 TAHAP 3: THINKING &amp; REASONING</div>
+        <h2>Diskusi: Apa yang Harus Kita Lakukan? 💭</h2>
+      </div>
+      <div class="card-body">
+        <div class="pemantik-box" style="background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border-color:var(--purple);">
+          <h3 style="color:var(--purple);">🤔 Diskusi Kita:</h3>
+          <div class="q-item" style="color:#4A148C;">Kalau ada malaikat yang mencatat amal baik dan buruk, apa yang harus kita lakukan?</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">💬 Berkata jujur</div>
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">🕌 Rajin shalat</div>
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">😇 Tidak nakal dan tidak mengganggu teman</div>
+          <div style="background:#E8F5E9;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;">🤝 Membantu orang tua</div>
+        </div>
+        <p><strong>Malaikat membuat kita sadar untuk selalu berbuat baik!</strong> 🌟</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-transfer">
+        <div class="stage-badge">🏠 TAHAP 5: TRANSFERRING</div>
+        <h2>Pulang Sekolah Mau Ngapain? 🏡</h2>
+      </div>
+      <div class="card-body">
+        <div class="pemantik-box" style="background:#FFF3E0;border-color:#FFB74D;">
+          <h3 style="color:#E65100;">💬 Guru bertanya:</h3>
+          <div class="q-item" style="color:#BF360C;">"Kalau tahu malaikat Raqib mencatat amal baik, apa yang akan kalian lakukan sepulang sekolah?"</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
+          <div style="background:#FFF8E1;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#B8860B;border-left:3px solid var(--gold);">🕌 Shalat Ashar tepat waktu</div>
+          <div style="background:#FFF8E1;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#B8860B;border-left:3px solid var(--gold);">🤝 Membantu orang tua di rumah</div>
+          <div style="background:#FFF8E1;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:700;color:#B8860B;border-left:3px solid var(--gold);">📚 Belajar dengan rajin</div>
+        </div>
+        <p style="background:#E8F5E9;border-radius:12px;padding:12px 16px;font-weight:700;color:#2E7D32;font-size:14px;">
+          💚 Pesan Guru: <em>"Beriman kepada malaikat artinya percaya dan meneladani kebaikan!"</em>
+        </p>
+        <div class="nav-btns">
+          <button class="btn-prev" onclick="showTab(2)">← Pertemuan 2</button>
+          <button class="btn-next" onclick="showTab(4)">Pertemuan 4 →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 4: PERTEMUAN 4: Ciri Anak Beriman
+  ══════════════════════════════════════════════ -->
+  <div class="panel" id="panel-4">
+
+    <div class="card">
+      <div class="card-head head-connect">
+        <div class="stage-badge">🔗 TAHAP 1: CONNECTING</div>
+        <h2>Siapa yang Selalu Bersama Kita? 👀</h2>
+      </div>
+      <div class="card-body">
+        <div class="pemantik-box">
+          <h3>💡 Pertanyaan Pemantik:</h3>
+          <div class="q-item">Siapa yang selalu bersama kita meskipun tidak terlihat?</div>
+          <div class="q-item">Pernahkah kamu merasa malu atau takut saat mau berbuat nakal?</div>
+        </div>
+        <p>Rasa malu dan takut berbuat nakal itu tanda iman kita! Malaikat Raqib dan Atid selalu mencatat setiap perbuatan kita. Allah Maha Melihat! 👁️</p>
+      </div>
+    </div>
+
+    <!-- ROLE PLAY -->
+    <div class="card">
+      <div class="card-head head-experience">
+        <div class="stage-badge">🎭 TAHAP 2: EXPERIENCING</div>
+        <h2>Bermain Peran: Anak Baik &amp; Malaikat ✨</h2>
+      </div>
+      <div class="card-body">
+        <p>Sekarang kita bermain peran! Klik karakter untuk melihat dialognya.</p>
+        <div class="roleplay-scene">
+          <div class="roleplay-chars">
+            <div class="rp-char child-char" onclick="showRPSpeech('child')">
+              <span class="char-emoji">👦</span>
+              <div class="char-label">Anak Baik</div>
+              <div style="font-size:11px;color:#666;">Klik saya!</div>
+            </div>
+            <div style="font-size:36px;display:flex;align-items:center;color:#888;">⚡</div>
+            <div class="rp-char angel-char" onclick="showRPSpeech('angel')">
+              <span class="char-emoji">😇</span>
+              <div class="char-label">Malaikat Raqib</div>
+              <div style="font-size:11px;color:#666;">Klik saya!</div>
+            </div>
+          </div>
+
+          <div class="rp-speech" id="rp-child">
+            <div class="speaker" style="color:#1565C0;">👦 Anak Baik berkata:</div>
+            "Hari ini aku membantu Bu Guru mengangkat buku, lalu aku shalat Dhuha di musola. Aku juga tidak mencontek saat ulangan meskipun sulit!" 😊
+          </div>
+          <div class="rp-speech angel-speech" id="rp-angel">
+            <div class="speaker" style="color:#B8860B;">😇 Malaikat Raqib berkata:</div>
+            "Alhamdulillah! Aku mencatat semua amal baikmu hari ini: membantu guru ✅, shalat Dhuha ✅, jujur saat ulangan ✅. Semua akan dilaporkan kepada Allah Swt.!" 📝✨
+          </div>
+
+          <div style="margin-top:12px;">
+            <button class="rp-btn" onclick="showRPSpeech('both')">🎭 Lihat Dialog Lengkap</button>
+            <button class="rp-btn" onclick="resetRP()" style="background:linear-gradient(135deg,#9E9E9E,#757575);">🔄 Ulang</button>
+          </div>
+        </div>
+        <div class="fun-fact">
+          <strong>💡 Pelajaran dari Bermain Peran:</strong><br>
+          Setiap perbuatan baik kita, sekecil apapun,akan dicatat oleh malaikat Raqib dan dilaporkan kepada Allah! Maka jadilah anak yang selalu berbuat baik. 🌟
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-think">
+        <div class="stage-badge">🧠 TAHAP 3: THINKING &amp; REASONING</div>
+        <h2>Mengapa Kita Harus Jujur? 🤔</h2>
+      </div>
+      <div class="card-body">
+        <div class="pemantik-box" style="background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border-color:var(--purple);">
+          <h3 style="color:var(--purple);">🤔 Diskusi Kita:</h3>
+          <div class="q-item" style="color:#4A148C;">Mengapa kita harus berkata jujur?</div>
+          <div class="q-item" style="color:#4A148C;">Apa akibatnya jika sering berbohong?</div>
+        </div>
+
+        <div class="section-lbl">⭐ Ciri-ciri Anak Beriman kepada Malaikat</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+          <div style="background:#E8F5E9;border-radius:14px;padding:14px;text-align:center;border:2px solid #A5D6A7;">
+            <div style="font-size:28px;margin-bottom:6px;">💬</div>
+            <div style="font-size:13px;font-weight:800;color:#2E7D32;">Jujur</div>
+          </div>
+          <div style="background:#E3F2FD;border-radius:14px;padding:14px;text-align:center;border:2px solid #90CAF9;">
+            <div style="font-size:28px;margin-bottom:6px;">🕌</div>
+            <div style="font-size:13px;font-weight:800;color:#1565C0;">Rajin Ibadah</div>
+          </div>
+          <div style="background:#FFF3E0;border-radius:14px;padding:14px;text-align:center;border:2px solid #FFB74D;">
+            <div style="font-size:28px;margin-bottom:6px;">🤝</div>
+            <div style="font-size:13px;font-weight:800;color:#E65100;">Suka Menolong</div>
+          </div>
+          <div style="background:#FCE4EC;border-radius:14px;padding:14px;text-align:center;border:2px solid #F48FB1;">
+            <div style="font-size:28px;margin-bottom:6px;">😊</div>
+            <div style="font-size:13px;font-weight:800;color:#880E4F;">Bertutur Baik</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head head-deep">
+        <div class="stage-badge">🌿 TAHAP 4: DEEPENING</div>
+        <h2>Membuang Sampah: Amal Baik atau Buruk? 🗑️</h2>
+      </div>
+      <div class="card-body">
+        <div style="background:linear-gradient(135deg,#FFF8E1,#FFF3CD);border-radius:16px;padding:18px;margin:10px 0;border:2px solid var(--gold);">
+          <p style="font-weight:700;color:#B8860B;font-size:15px;margin-bottom:14px;">🎯 Guru bertanya, klik jawabanmu!</p>
+          <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px;">Kalau membuang sampah sembarangan, itu dicatat sebagai amal baik atau buruk? 🤔</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button onclick="answerDeep(this,'wrong')" style="padding:12px 24px;border-radius:99px;border:none;font-size:14px;font-weight:800;cursor:pointer;background:#E8F5E9;color:#2E7D32;">👍 Amal Baik</button>
+            <button onclick="answerDeep(this,'correct')" style="padding:12px 24px;border-radius:99px;border:none;font-size:14px;font-weight:800;cursor:pointer;background:#FFEBEE;color:#C62828;">👎 Amal Buruk</button>
+          </div>
+          <div id="deep-answer" style="display:none;margin-top:12px;padding:12px 16px;border-radius:12px;font-size:13px;"></div>
+        </div>
+        <p>Malaikat Atid mencatat semua perbuatan buruk kita, termasuk membuang sampah sembarangan! Jadi selalu jaga kebersihan ya! 🌱</p>
+        <p><strong>Iman kepada malaikat membuat kita berakhlak mulia!</strong> ✨</p>
+      </div>
+    </div>
+
+    <!-- KOMITMEN / JURNAL AMAL -->
+    <div class="card">
+      <div class="card-head head-transfer">
+        <div class="stage-badge">🏠 TAHAP 5: TRANSFERRING</div>
+        <h2>Komitmenku Hari Ini! 💪</h2>
+      </div>
+      <div class="card-body">
+        <p>Siswa membuat komitmen, klik untuk menyatakan komitmenmu! ✊</p>
+        <div class="komitmen-box">
+          <h4>💚 Komitmen Baikku:</h4>
+          <div class="komitmen-item" onclick="toggleKomitmen(this)">
+            <span class="komitmen-check">⬜</span>
+            <span>"Hari ini saya akan berkata jujur kepada orang tua dan guru!"</span>
+          </div>
+          <div class="komitmen-item" onclick="toggleKomitmen(this)">
+            <span class="komitmen-check">⬜</span>
+            <span>"Hari ini saya akan membantu orang tua di rumah!"</span>
+          </div>
+          <div class="komitmen-item" onclick="toggleKomitmen(this)">
+            <span class="komitmen-check">⬜</span>
+            <span>"Hari ini saya akan shalat 5 waktu tepat waktu!"</span>
+          </div>
+          <div class="komitmen-item" onclick="toggleKomitmen(this)">
+            <span class="komitmen-check">⬜</span>
+            <span>"Hari ini saya tidak akan membuang sampah sembarangan!"</span>
+          </div>
+          <div class="komitmen-item" onclick="toggleKomitmen(this)">
+            <span class="komitmen-check">⬜</span>
+            <span>"Hari ini saya akan berbuat baik kepada teman-teman!"</span>
+          </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#0D47A1,#1565C0);border-radius:16px;padding:20px;text-align:center;margin:16px 0;">
+          <div style="font-size:32px;margin-bottom:8px;">🤲</div>
+          <p style="color:#fff;font-size:14px;font-weight:700;margin:0;">
+            "Semoga Allah Swt. memberkahi setiap langkah kebaikan kita dan malaikat Raqib selalu mencatat amal baik kita. Aamiin! 💙"
+          </p>
+          <p style="color:#FFD700;font-family:'Fredoka One',cursive;font-size:16px;margin:10px 0 0;">Jazākallāhu Khayran ✨</p>
+        </div>
+
+        <div class="nav-btns" style="justify-content:space-between;">
+          <button class="btn-prev" onclick="showTab(3)">← Pertemuan 3</button>
+          <button class="btn-next" onclick="showTab(5)">📝 Kerjakan Kuis →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PANEL 5: KUIS
+  ══════════════════════════════════════════════ -->
+  <div class="panel" id="panel-5">
+    <div class="card">
+      <div class="card-head" style="background:linear-gradient(135deg,#F97B5B,#E84393);">
+        <div class="stage-badge" style="border-color:rgba(255,255,255,.4);">📝 EVALUASI AKHIR</div>
+        <h2>Kuis: Mengenal Malaikat Allah 🌟</h2>
+      </div>
+      <div class="card-body">
+        <div class="quiz-header">
+          <h3>🎯 Uji Pemahamanmu!</h3>
+          <p>Ada 7 soal pilihan ganda. Kerjakan dengan jujur ya! 😊</p>
+        </div>
+        <div id="quiz-container">
+    <div class="quiz-q-wrap">
+      <div class="quiz-q-info">
+        <span class="qnum">SOAL 1 DARI 7</span>
+        <span class="qscore">⭐ Skor: 0</span>
+      </div>
+      <div class="quiz-question">Malaikat diciptakan Allah dari...</div>
+      <div class="quiz-options">
+        
+          <button class="quiz-opt" id="qopt-0" onclick="pickAnswer(0)">
+            <span class="opt-letter">A</span>Tanah liat
+          </button>
+        
+          <button class="quiz-opt" id="qopt-1" onclick="pickAnswer(1)">
+            <span class="opt-letter">B</span>Cahaya (Nur)
+          </button>
+        
+          <button class="quiz-opt" id="qopt-2" onclick="pickAnswer(2)">
+            <span class="opt-letter">C</span>Api
+          </button>
+        
+          <button class="quiz-opt" id="qopt-3" onclick="pickAnswer(3)">
+            <span class="opt-letter">D</span>Air
+          </button>
+        
+      </div>
+      <div class="quiz-feedback" id="qfb"></div>
+      <div class="quiz-nav-row">
+        <button class="quiz-next-btn" id="qnext" onclick="nextQ()">
+          Soal Berikutnya →
+        </button>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+
+
+
+<script>
+//  TAB NAVIGATION 
+const tabs = document.querySelectorAll('.tab-btn');
+function showTab(n){
+  document.querySelectorAll('.panel').forEach(p=>{
+    p.classList.remove('active');
+    p.style.display = 'none';
+  });
+  tabs.forEach(t=>t.classList.remove('active'));
+  const target = document.getElementById('panel-'+n);
+  if(target){ target.style.display = 'block'; target.classList.add('active'); }
+  tabs[n].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+//  ANGEL DATA 
+const angels = [
+  { name:'Jibril',   emoji:'📜', color:'#1565C0', task:'Menyampaikan wahyu kepada para Nabi',   detail:'Malaikat Jibril adalah malaikat paling utama. Tugasnya sangat mulia: menyampaikan firman Allah (wahyu) kepada Nabi dan Rasul. Beliaulah yang menyampaikan Al-Qur\'an kepada Nabi Muhammad ﷺ.' },
+  { name:'Mikail',   emoji:'🌧️', color:'#2E7D32', task:'Mengatur dan membagi rezeki',           detail:'Malaikat Mikail bertugas mengatur rezeki seluruh makhluk Allah, termasuk hujan, tanaman, dan makanan yang kita makan sehari-hari.' },
+  { name:'Israfil',  emoji:'📯', color:'#7B52AF', task:'Meniup sangkakala pada hari kiamat',    detail:'Malaikat Israfil akan meniup terompet besar (sangkakala) pada hari kiamat. Tiupan pertama membuat semua makhluk mati, tiupan kedua membangkitkan manusia.' },
+  { name:'Izrail',   emoji:'🌙', color:'#37474F', task:'Mencabut nyawa semua makhluk hidup',    detail:'Malaikat Izrail (Malakul Maut) bertugas mencabut nyawa semua makhluk yang hidup ketika sudah tiba ajalnya.' },
+  { name:'Raqib',    emoji:'✅', color:'#1B5E20', task:'Mencatat semua amal BAIK manusia',     detail:'Malaikat Raqib selalu ada di sisi kita dan mencatat setiap perbuatan baik yang kita lakukan. Tidak ada kebaikan sekecil apapun yang terlewat!' },
+  { name:'Atid',     emoji:'📋', color:'#B71C1C', task:'Mencatat semua amal BURUK manusia',   detail:'Malaikat Atid mencatat setiap perbuatan buruk kita. Maka berhati-hatilah dan hindari perbuatan buruk agar catatan kita bersih!' },
+  { name:'Munkar',   emoji:'❓', color:'#4A148C', task:'Menanya di alam kubur',               detail:'Malaikat Munkar bersama Nakir akan menanyai manusia di alam kubur tentang Tuhan, Nabi, agama, dan amal perbuatan mereka.' },
+  { name:'Nakir',    emoji:'❔', color:'#4A148C', task:'Menanya di alam kubur (bersama Munkar)',detail:'Malaikat Nakir bersama Munkar bertugas menguji manusia di alam kubur. Orang yang beriman akan dapat menjawab dengan baik.' },
+  { name:'Malik',    emoji:'🔥', color:'#BF360C', task:'Menjaga pintu neraka',                detail:'Malaikat Malik adalah penjaga neraka. Beliau menjaga pintu neraka dan menangani orang-orang yang masuk ke dalamnya.' },
+  { name:'Ridwan',   emoji:'🌟', color:'#1A237E', task:'Menjaga pintu surga',                 detail:'Malaikat Ridwan adalah penjaga surga. Beliau menyambut dengan bahagia orang-orang beriman yang masuk ke dalam surga.' },
+];
+
+//  BUILD ANGEL CARDS (Pertemuan 1) 
+function buildAngelCards(){
+  const grid = document.getElementById('angel-cards-p1');
+  if(!grid) return;
+  grid.innerHTML = ''; // clear any duplicates
+  const subset = angels.slice(0,6);
+  subset.forEach((a,i)=>{
+    const colors=['#1565C0','#2E7D32','#7B52AF','#BF360C','#1B5E20','#B71C1C'];
+    const c = colors[i];
+    // Each card + detail wrapped together so JS can find sibling
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:contents';
+    const card = document.createElement('div');
+    card.className = 'angel-card';
+    card.setAttribute('data-idx', i);
+    card.innerHTML = `
+      <div class="angel-card-inner" style="background:${c};">
+        <span class="emoji">${a.emoji}</span>
+        <span class="name">${a.name}</span>
+      </div>
+      <div class="angel-card-footer" style="background:${c}cc;">${a.task.slice(0,22)}...</div>
+    `;
+    const detail = document.createElement('div');
+    detail.className = 'angel-detail';
+    detail.id = 'angel-detail-' + i;
+    detail.innerHTML = a.detail;
+    card.addEventListener('click', function(){ toggleAngel(i); });
+    card.addEventListener('touchend', function(e){ e.preventDefault(); toggleAngel(i); });
+    wrapper.appendChild(card);
+    wrapper.appendChild(detail);
+    grid.appendChild(wrapper);
+  });
+}
+
+function toggleAngel(idx){
+  const detail = document.getElementById('angel-detail-' + idx);
+  if (!detail) return;
+  const isOpen = detail.style.display === 'block';
+  // close all
+  for(let i=0;i<10;i++){
+    const d = document.getElementById('angel-detail-' + i);
+    if(d) d.style.display = 'none';
+    const cards = document.querySelectorAll('.angel-card[data-idx="'+i+'"]');
+    cards.forEach(c=>c.classList.remove('open'));
+  }
+  if(!isOpen){
+    detail.style.display = 'block';
+    const card = document.querySelector('.angel-card[data-idx="'+idx+'"]');
+    if(card) card.classList.add('open');
+  }
+}
+
+//  MATCHING GAME 
+const matchData = [
+  { angel:'Jibril',  task:'Menyampaikan wahyu' },
+  { angel:'Mikail',  task:'Mengatur rezeki' },
+  { angel:'Israfil', task:'Meniup sangkakala' },
+  { angel:'Izrail',  task:'Mencabut nyawa' },
+  { angel:'Raqib',   task:'Mencatat amal baik' },
+  { angel:'Atid',    task:'Mencatat amal buruk' },
+  { angel:'Munkar',  task:'Menanya di kubur' },
+  { angel:'Malik',   task:'Menjaga neraka' },
+];
+
+let matchSelected = null;
+let matchPairs = 0;
+
+function buildMatchGame(){
+  const container = document.getElementById('match-game-p3');
+  if(!container) return;
+  const shuffledTasks = [...matchData].sort(()=>Math.random()-.5);
+  const shuffledAngels = [...matchData].sort(()=>Math.random()-.5);
+  container.innerHTML = `
+    <div class="match-instruction">Klik nama malaikat, lalu klik tugasnya! 🎯</div>
+    <div class="match-score">⭐ Skor: <span id="mscore">0</span> / ${matchData.length}</div>
+    <div class="match-cols">
+      <div>
+        <h4 class="left-h">🌟 Nama Malaikat</h4>
+        ${shuffledAngels.map(d=>`<div class="match-item angel-item" data-type="angel" data-name="${d.angel}" onclick="selectMatch(this)">${d.angel}</div>`).join('')}
+      </div>
+      <div>
+        <h4 class="right-h">📋 Tugasnya</h4>
+        ${shuffledTasks.map(d=>`<div class="match-item task-item" data-type="task" data-name="${d.angel}" onclick="selectMatch(this)">${d.task}</div>`).join('')}
+      </div>
+    </div>
+    <div class="match-result" id="match-result">
+      <div style="font-size:40px;">🎉</div>
+      <div style="font-family:'Fredoka One',cursive;font-size:20px;color:#2E7D32;">Luar Biasa! Kamu Hebat!</div>
+      <div style="font-size:14px;color:#555;margin:8px 0;">Semua malaikat berhasil dipasangkan! MasyaAllah! ✨</div>
+      <button onclick="resetMatch()" style="background:linear-gradient(135deg,#5DB85C,#3DA33C);color:#fff;border:none;border-radius:99px;padding:10px 24px;font-size:14px;font-weight:800;cursor:pointer;margin-top:8px;">🔄 Main Lagi</button>
+    </div>
+  `;
+  matchSelected = null; matchPairs = 0;
+}
+
+function selectMatch(el){
+  if(el.classList.contains('matched')) return;
+  const type = el.dataset.type;
+  if(!matchSelected){
+    if(type !== 'angel') return;
+    el.classList.add('selected');
+    matchSelected = el;
+  } else {
+    if(type !== 'task'){ matchSelected.classList.remove('selected'); matchSelected=null; el.classList.add('selected'); matchSelected=el; return; }
+    if(matchSelected.dataset.name === el.dataset.name){
+      matchSelected.classList.remove('selected');
+      matchSelected.classList.add('matched','correct-flash');
+      el.classList.add('matched','correct-flash');
+      matchPairs++;
+      document.getElementById('mscore').textContent = matchPairs;
+      matchSelected=null;
+      if(matchPairs === matchData.length){ setTimeout(()=>{ document.getElementById('match-result').classList.add('show'); },400); }
+    } else {
+      el.classList.add('wrong-flash');
+      matchSelected.classList.add('wrong-flash');
+      setTimeout(()=>{ el.classList.remove('wrong-flash'); matchSelected.classList.remove('wrong-flash','selected'); matchSelected=null; },500);
+    }
+  }
+}
+
+function resetMatch(){ matchPairs=0; matchSelected=null; buildMatchGame(); }
+
+//  YEL-YEL 
+const yelData = [
+  { angel:'Jibril',  task:'Wahyu!',     color:'#1565C0' },
+  { angel:'Mikail',  task:'Rezeki!',    color:'#2E7D32' },
+  { angel:'Israfil', task:'Sangkakala!',color:'#7B52AF' },
+  { angel:'Izrail',  task:'Nyawa!',     color:'#37474F' },
+  { angel:'Raqib',   task:'Catat Baik!',color:'#1B5E20' },
+  { angel:'Atid',    task:'Catat Buruk!',color:'#B71C1C'},
+  { angel:'Munkar',  task:'Tanya Kubur!',color:'#4A148C'},
+  { angel:'Malik',   task:'Jaga Neraka!',color:'#BF360C'},
+  { angel:'Ridwan',  task:'Jaga Surga!', color:'#1A237E'},
+];
+
+function buildYelYel(){
+  const grid = document.getElementById('yel-grid');
+  if(!grid) return;
+  grid.innerHTML = ''; // prevent duplicates
+  yelData.forEach((y,i)=>{
+    const row = document.createElement('div');
+    row.className='yel-row';
+    const btn = document.createElement('button');
+    btn.className = 'yel-angel-btn';
+    btn.style.background = `linear-gradient(135deg,${y.color},${y.color}CC)`;
+    btn.textContent = y.angel;
+    btn.onclick = function(){ showYelTask(i); };
+    const arrow = document.createElement('span');
+    arrow.className = 'yel-arrow';
+    arrow.textContent = '→';
+    const bubble = document.createElement('div');
+    bubble.className = 'yel-task-bubble';
+    bubble.id = 'ybubble-' + i;
+    bubble.textContent = y.task;
+    row.appendChild(btn);
+    row.appendChild(arrow);
+    row.appendChild(bubble);
+    grid.appendChild(row);
+  });
+}
+
+function showYelTask(i){
+  const bubble=document.getElementById('ybubble-'+i);
+  bubble.classList.toggle('show');
+}
+
+function showAllChant(){
+  const chant=document.getElementById('yel-chant');
+  chant.classList.add('show');
+  const lines=yelData.map((y,i)=>`<div class="yel-line" style="animation-delay:${i*.1}s;"><span>${y.angel}</span> ${y.task}</div>`).join('');
+  chant.innerHTML=`<div style="font-family:'Fredoka One',cursive;font-size:18px;color:#FFD700;text-align:center;margin-bottom:12px;">🎤 YEL-YEL MALAIKAT KITA! 🎤</div>${lines}`;
+  yelData.forEach((_,i)=>{
+    const b=document.getElementById('ybubble-'+i);
+    if(b) b.classList.add('show');
+  });
+}
+
+//  ROLE PLAY 
+function showRPSpeech(who){
+  const child=document.getElementById('rp-child');
+  const angel=document.getElementById('rp-angel');
+  if(who==='child'){ child.classList.toggle('show'); angel.classList.remove('show'); }
+  else if(who==='angel'){ angel.classList.toggle('show'); child.classList.remove('show'); }
+  else { child.classList.add('show'); angel.classList.add('show'); }
+}
+function resetRP(){
+  document.getElementById('rp-child').classList.remove('show');
+  document.getElementById('rp-angel').classList.remove('show');
+}
+
+//  JURNAL AMAL 
+function checkJurnal(el){
+  el.classList.toggle('checked');
+  el.querySelector('.jurnal-check').innerHTML = el.classList.contains('checked') ? '✓' : '☐';
+  updateJurnalScore();
+}
+function updateJurnalScore(){
+  const checked = document.querySelectorAll('#panel-1 .jurnal-item.checked').length;
+  const total = document.querySelectorAll('#panel-1 .jurnal-item').length;
+  const sc = document.getElementById('jurnal-score-1');
+  if(sc) sc.textContent = checked + ' / ' + total + (checked===total ? ' ⭐ Luar biasa! MasyaAllah!' : ' perbuatan baik hari ini!');
+}
+
+//  TRANSFER P2 
+const deeds2 = new Set();
+function addGoodDeed(deed){
+  if(deeds2.has(deed)) return;
+  deeds2.add(deed);
+  const div=document.getElementById('transfer-p2-answers');
+  if(!div) return;
+  const item=document.createElement('div');
+  item.style.cssText='background:#E8F5E9;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;color:#2E7D32;border-left:3px solid #4CAF50;animation:fadeUp .3s ease;';
+  item.textContent='✅ '+deed;
+  div.appendChild(item);
+}
+
+//  DEEPENING P4 
+function answerDeep(btn, verdict){
+  const ansDiv=document.getElementById('deep-answer');
+  ansDiv.style.display='block';
+  if(verdict==='correct'){
+    btn.style.background='#4CAF50'; btn.style.color='#fff';
+    ansDiv.style.background='#E8F5E9'; ansDiv.style.color='#2E7D32'; ansDiv.style.border='1px solid #A5D6A7';
+    ansDiv.innerHTML='✅ <strong>Betul sekali!</strong> Membuang sampah sembarangan dicatat sebagai amal BURUK oleh Malaikat Atid. Yuk kita selalu jaga kebersihan! 🌱';
+  } else {
+    btn.style.background='#EF5350'; btn.style.color='#fff';
+    ansDiv.style.background='#FFEBEE'; ansDiv.style.color='#C62828'; ansDiv.style.border='1px solid #EF9A9A';
+    ansDiv.innerHTML='❌ <strong>Coba lagi!</strong> Membuang sampah sembarangan termasuk perbuatan buruk yang dicatat Malaikat Atid. Mari kita perbaiki ya! 💪';
+  }
+  ansDiv.style.animation='fadeUp .3s ease';
+}
+
+//  KOMITMEN 
+function toggleKomitmen(el){
+  el.classList.toggle('done');
+  el.querySelector('.komitmen-check').textContent = el.classList.contains('done') ? '✅' : '⬜';
+}
+
+//  QUIZ 
+const quizData=[
+  { q:'Malaikat diciptakan Allah dari...', opts:['Tanah liat','Cahaya (Nur)','Api','Air'],correct:1,fb:'Benar! Malaikat diciptakan dari Cahaya (Nur). Sedangkan manusia dari tanah, dan jin dari api.' },
+  { q:'Malaikat yang bertugas menyampaikan wahyu kepada Nabi adalah...', opts:['Mikail','Izrail','Jibril','Israfil'],correct:2,fb:'Benar! Malaikat Jibril bertugas menyampaikan wahyu (firman Allah) kepada para Nabi dan Rasul termasuk Nabi Muhammad ﷺ.' },
+  { q:'Malaikat Raqib bertugas untuk...', opts:['Mencatat amal buruk','Meniup sangkakala','Mencatat amal baik','Menjaga surga'],correct:2,fb:'Benar! Malaikat Raqib mencatat semua amal BAIK yang kita lakukan. Jadi perbanyak perbuatan baik ya!' },
+  { q:'Manakah yang BUKAN sifat malaikat?', opts:['Taat kepada Allah','Tidak berbuat dosa','Makan dan minum','Diciptakan dari cahaya'],correct:2,fb:'Benar! Malaikat TIDAK makan dan minum. Itu adalah sifat manusia. Malaikat taat, tidak berdosa, dan diciptakan dari cahaya.' },
+  { q:'Malaikat yang menjaga pintu surga adalah...', opts:['Malik','Ridwan','Munkar','Nakir'],correct:1,fb:'Benar! Malaikat Ridwan menjaga pintu surga. Sedangkan Malaikat Malik menjaga pintu neraka.' },
+  { q:'Contoh perilaku anak yang beriman kepada malaikat adalah...', opts:['Suka berbohong','Malas shalat','Rajin belajar dan jujur','Membuang sampah sembarangan'],correct:2,fb:'Benar! Anak yang beriman kepada malaikat akan rajin belajar, jujur, dan berbuat baik karena tahu setiap amal dicatat malaikat!' },
+  { q:'Beriman kepada malaikat artinya...', opts:['Tidak perlu beribadah','Percaya malaikat itu ada dan ciptaan Allah','Takut kepada malaikat','Tidak perlu berdoa'],correct:1,fb:'Benar! Beriman kepada malaikat artinya percaya bahwa malaikat itu ada, adalah ciptaan Allah, dan selalu taat kepada Allah Swt.' },
+];
+
+let qIdx=0, qScore=0, qAnswered=false;
+
+function renderQuiz(){
+  const c=document.getElementById('quiz-container');
+  if(!c) return;
+  if(qIdx>=quizData.length){ showQuizResult(c); return; }
+  const q=quizData[qIdx];
+  const letters=['A','B','C','D'];
+  c.innerHTML=`
+    <div class="quiz-q-wrap">
+      <div class="quiz-q-info">
+        <span class="qnum">SOAL ${qIdx+1} DARI ${quizData.length}</span>
+        <span class="qscore">⭐ Skor: ${qScore}</span>
+      </div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o,i)=>`
+          <button class="quiz-opt" id="qopt-${i}" onclick="pickAnswer(${i})">
+            <span class="opt-letter">${letters[i]}</span>${o}
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="qfb"></div>
+      <div class="quiz-nav-row">
+        <button class="quiz-next-btn" id="qnext" onclick="nextQ()">
+          ${qIdx<quizData.length-1?'Soal Berikutnya →':'Lihat Hasil 🎉'}
+        </button>
+      </div>
+    </div>
+  `;
+  qAnswered=false;
+}
+
+function pickAnswer(i){
+  if(qAnswered) return;
+  qAnswered=true;
+  const q=quizData[qIdx];
+  document.querySelectorAll('.quiz-opt').forEach(o=>o.disabled=true);
+  document.getElementById('qopt-'+i).classList.add(i===q.correct?'correct':'wrong');
+  if(i!==q.correct) document.getElementById('qopt-'+q.correct).classList.add('correct');
+  const fb=document.getElementById('qfb');
+  fb.className='quiz-feedback '+(i===q.correct?'qfb-correct':'qfb-wrong')+' show';
+  fb.innerHTML=(i===q.correct?'✅ ':'❌ ')+q.fb;
+  if(i===q.correct) qScore++;
+  document.getElementById('qnext').classList.add('show');
+}
+
+function nextQ(){ qIdx++; renderQuiz(); }
+
+function showQuizResult(c){
+  const pct=Math.round(qScore/quizData.length*100);
+  let stars='', msg='';
+  if(pct>=85){ stars='⭐⭐⭐'; msg='MasyaAllah! Luar biasa! Kamu sangat paham tentang malaikat Allah! 🌟'; }
+  else if(pct>=60){ stars='⭐⭐'; msg='Bagus! Terus belajar ya, kamu pasti bisa lebih baik! 💪'; }
+  else { stars='⭐'; msg='Jangan menyerah! Ulangi belajar dan coba lagi. Semangat! 😊'; }
+  c.innerHTML=`
+    <div class="quiz-result">
+      <div class="stars-row">${stars}</div>
+      <div class="score-big">${qScore} / ${quizData.length}</div>
+      <div class="score-label">Nilai: ${pct}%</div>
+      <div class="quiz-msg">${msg}</div>
+      <div style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB);border-radius:14px;padding:16px;margin:14px 0;">
+        <p style="font-size:14px;font-weight:700;color:#1565C0;margin:0;">
+          🎊 Alhamdulillah! Kamu sudah menyelesaikan semua pembelajaran tentang Malaikat Allah. Ingat selalu untuk selalu berbuat baik karena Malaikat Raqib selalu mencatatnya! ✨
+        </p>
+      </div>
+      <button class="restart-btn" onclick="qIdx=0;qScore=0;qAnswered=false;renderQuiz()">🔄 Ulangi Kuis</button>
+    </div>
+  `;
+}
+
+//  INIT 
+buildAngelCards();
+buildMatchGame();
+buildYelYel();
+renderQuiz();
+
+// ============ EDITOR SYSTEM ============
+
+let editMode = false;
+let bgTop = '#87CEEB';
+let bgBottom = '#D4EDFF';
+
+function toggleEditMode() {
+  editMode = !editMode;
+  const btn = document.getElementById('edit-toggle');
+  const toolbar = document.getElementById('editor-toolbar');
+  const indicator = document.getElementById('edit-indicator');
+
+  if (editMode) {
+    makeEditable(true);
+    document.body.classList.add('edit-mode');
+    btn.classList.add('active');
+    btn.innerHTML = '✖ Keluar Edit';
+    toolbar.classList.add('show');
+    indicator.classList.add('show');
+  } else {
+    makeEditable(false);
+    document.body.classList.remove('edit-mode');
+    btn.classList.remove('active');
+    btn.innerHTML = '✏️ Mode Edit';
+    toolbar.classList.remove('show');
+    indicator.classList.remove('show');
+    document.getElementById('settings-panel').classList.remove('show');
+    document.getElementById('tb-settings-btn').classList.remove('active');
+  }
+}
+
+function makeEditable(on) {
+  const selectors = [
+    'h1','h2','h3','h4',
+    '.stage-badge','.badge-top','.section-lbl',
+    '.tujuan-list li','.q-item',
+    '.cover-info-box p','.cover-info-box h4',
+    '.match-instruction','.yel-title',
+    '.char-label',
+    '.komitmen-item span:last-child',
+    '.jurnal-text','.jurnal-box h3',
+    '.quiz-header p','.angel-table td',
+    'button.btn-next','button.btn-prev'
+  ];
+  selectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      if (el.closest('#quiz-container')) return;
+      el.contentEditable = on ? 'true' : 'false';
+    });
+  });
+  // Make p tags editable (exclude quiz)
+  document.querySelectorAll('p').forEach(el => {
+    if (!el.closest('#quiz-container')) el.contentEditable = on ? 'true' : 'false';
+  });
+  // Make styled divs with text editable
+  document.querySelectorAll('.fun-fact,.pemantik-box h3').forEach(el => {
+    el.contentEditable = on ? 'true' : 'false';
+  });
+}
+
+function fmt(cmd) {
+  document.execCommand(cmd, false, null);
+}
+
+function setFontSize(size) {
+  if (!size) return;
+  document.execCommand('fontSize', false, '7');
+  document.querySelectorAll('font[size="7"]').forEach(el => {
+    el.removeAttribute('size');
+    el.style.fontSize = size;
+  });
+}
+
+function setColor(color) {
+  document.execCommand('foreColor', false, color);
+}
+
+function undoEdit() { document.execCommand('undo'); }
+function redoEdit() { document.execCommand('redo'); }
+
+function changeCSSVar(varName, value) {
+  document.documentElement.style.setProperty(varName, value);
+}
+
+function changeCSSVarPx(varName, value) {
+  document.documentElement.style.setProperty(varName, value + 'px');
+}
+
+function changeFontBody(font) {
+  document.body.style.fontFamily = font;
+}
+
+function changeBaseFontSize(size) {
+  document.querySelectorAll('p').forEach(el => {
+    if (!el.closest('#quiz-container')) el.style.fontSize = size + 'px';
+  });
+}
+
+function changeBGColor(pos, color) {
+  if (pos === 'top') bgTop = color;
+  else bgBottom = color;
+  document.body.style.background = `linear-gradient(160deg, ${bgTop} 0%, ${bgTop}CC 40%, ${bgBottom} 100%)`;
+}
+
+function changeMaxWidth(w) {
+  document.getElementById('app').style.maxWidth = w;
+}
+
+function toggleSettings() {
+  const panel = document.getElementById('settings-panel');
+  const btn = document.getElementById('tb-settings-btn');
+  panel.classList.toggle('show');
+  btn.classList.toggle('active');
+}
+
+function saveContent() {
+  try {
+    localStorage.setItem('tugas2_style', document.documentElement.getAttribute('style') || '');
+    localStorage.setItem('tugas2_bodyStyle', document.body.getAttribute('style') || '');
+  } catch(e) {}
+  const msg = document.getElementById('tb-save-msg');
+  msg.style.opacity = '1';
+  setTimeout(() => { msg.style.opacity = '0'; }, 2500);
+}
+
+function downloadHTML() {
+  // Temporarily remove edit mode classes for clean download
+  const wasEdit = editMode;
+  if (wasEdit) {
+    makeEditable(false);
+    document.body.classList.remove('edit-mode');
+    document.getElementById('editor-toolbar').classList.remove('show');
+    document.getElementById('edit-indicator').classList.remove('show');
+    document.getElementById('settings-panel').classList.remove('show');
+  }
+
+  const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+  if (wasEdit) {
+    makeEditable(true);
+    document.body.classList.add('edit-mode');
+    document.getElementById('editor-toolbar').classList.add('show');
+    document.getElementById('edit-indicator').classList.add('show');
+  }
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Tugas2_MediaPembelajaran_HasnaIzzatulAisy_NIM.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+
+function resetAllChanges() {
+  if (!confirm('Reset semua perubahan warna dan tema? Teks yang sudah diedit tidak akan berubah.')) return;
+  document.documentElement.style.cssText = '';
+  document.body.style.cssText = '';
+  bgTop = '#87CEEB'; bgBottom = '#D4EDFF';
+  document.getElementById('app').style.maxWidth = '';
+}
+
+// Restore saved styles on load
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const savedStyle = localStorage.getItem('tugas2_style');
+    const savedBodyStyle = localStorage.getItem('tugas2_bodyStyle');
+    if (savedStyle) document.documentElement.setAttribute('style', savedStyle);
+    if (savedBodyStyle) document.body.setAttribute('style', savedBodyStyle);
+  } catch(e) {}
+});
+</script>
+
+
+</body></html>
